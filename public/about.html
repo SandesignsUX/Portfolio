@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link
+    href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@100,200,300,400,500,700,800,900&f[]=satoshi@300,400,500,700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #141210;
+      --bg-2: #1C1914;
+      --bg-3: #221F1B;
+      --bg-card: #1A1714;
+      --cream: #F0E8D8;
+      --cream-60: rgba(240, 232, 216, 0.6);
+      --cream-35: rgba(240, 232, 216, 0.35);
+      --cream-15: rgba(240, 232, 216, 0.15);
+      --cream-04: rgba(240, 232, 216, 0.04);
+      --amber: #B48246;
+      --amber-light: #C49A5A;
+      --amber-muted: rgba(180, 130, 70, 0.15);
+      --amber-border: rgba(180, 130, 70, 0.25);
+      --border: rgba(240, 232, 216, 0.08);
+      --border-mid: rgba(240, 232, 216, 0.12);
+      --font-display: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif;
+      --font-body: 'Satoshi', 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    .global-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: rgba(20, 18, 16, 0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--amber);
+      font-weight: 300;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--cream-35);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-link.active {
+      color: var(--cream);
+      font-weight: 500;
+    }
+
+    .nav-cta {
+      padding: 8px 20px;
+      background: transparent;
+      border: 1px solid var(--border-mid);
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--cream);
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+    }
+
+    /* PAGE */
+    .page-content {
+      padding-top: 56px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding-left: 40px;
+      padding-right: 40px;
+      padding-bottom: 120px;
+    }
+
+    /* HERO */
+    .about-hero {
+      padding: 80px 0 72px;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .hero-left {}
+
+    .hero-eyebrow {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 6vw, 64px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+
+    .hero-title-light {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 6vw, 64px);
+      font-weight: 200;
+      letter-spacing: -0.03em;
+      line-height: 0.9;
+      color: var(--amber);
+      margin-bottom: 32px;
+    }
+
+    .hero-role-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 16px;
+      border: 1px solid var(--border-mid);
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream-35);
+      margin-bottom: 28px;
+    }
+
+    .hero-desc {
+      font-family: var(--font-body);
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--cream-60);
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    .hero-desc em {
+      font-style: italic;
+      color: var(--cream);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 13px 28px;
+      background: var(--amber);
+      color: var(--bg);
+      border: none;
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-secondary {
+      padding: 12px 28px;
+      background: transparent;
+      color: var(--cream);
+      border: 1px solid var(--border-mid);
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 400;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* PHOTO STACK */
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .photo-main {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo-main::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(240, 232, 216, 0.03) 39px, rgba(240, 232, 216, 0.03) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(240, 232, 216, 0.03) 39px, rgba(240, 232, 216, 0.03) 40px);
+    }
+
+    .photo-candid {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo-candid::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(240, 232, 216, 0.03) 39px, rgba(240, 232, 216, 0.03) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(240, 232, 216, 0.03) 39px, rgba(240, 232, 216, 0.03) 40px);
+    }
+
+    .photo-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 16px;
+    }
+
+    .photo-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+      display: block;
+      opacity: 0.3;
+    }
+
+    .photo-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--cream-15);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .photo-dims {
+      font-family: var(--font-body);
+      font-size: 10px;
+      color: var(--cream-15);
+      margin-top: 6px;
+      padding: 2px 8px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    /* SECTIONS */
+    .about-section {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 28px;
+    }
+
+    /* TWO COL LAYOUT */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .two-col-wide {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* BODY TEXT */
+    .body-text {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--cream-60);
+      line-height: 1.85;
+      margin-bottom: 18px;
+    }
+
+    .body-text:last-child {
+      margin-bottom: 0;
+    }
+
+    .body-text strong {
+      color: var(--cream);
+      font-weight: 500;
+    }
+
+    .body-text em {
+      font-style: italic;
+      color: var(--cream);
+    }
+
+    /* BELIEF CARDS */
+    .belief-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .belief-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      background: var(--bg-card);
+    }
+
+    .belief-num {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--amber);
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+      opacity: 0.6;
+    }
+
+    .belief-title {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .belief-desc {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--cream-60);
+      line-height: 1.6;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .skill-group {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      background: var(--bg-card);
+    }
+
+    .skill-group-label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 10px;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill-tag {
+      padding: 4px 10px;
+      background: var(--cream-04);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--cream-60);
+    }
+
+    /* OUTSIDE DESIGN */
+    .interest-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .interest-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--cream-60);
+    }
+
+    .interest-pill span {
+      font-size: 16px;
+    }
+
+    /* EDUCATION */
+    .edu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .edu-item {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 20px;
+      background: var(--bg-card);
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .edu-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--amber);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .edu-title {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--cream);
+      letter-spacing: -0.01em;
+      margin-bottom: 2px;
+    }
+
+    .edu-sub {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--cream-60);
+    }
+
+    /* LOOKING FOR */
+    .looking-card {
+      border: 1px solid var(--amber-border);
+      border-radius: 20px;
+      padding: 36px;
+      background: var(--amber-muted);
+      margin-bottom: 10px;
+    }
+
+    .looking-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--cream);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .looking-text {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--cream-60);
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+
+    .looking-text:last-child {
+      margin-bottom: 0;
+    }
+
+    .looking-text strong {
+      color: var(--cream);
+      font-weight: 500;
+    }
+
+    .target-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .target-pill {
+      padding: 5px 14px;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--cream-60);
+    }
+
+    /* CLOSING LINE */
+    .closing-strip {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 48px 40px;
+      background: var(--bg-2);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .closing-strip::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(180, 130, 70, 0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .closing-quote {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 2.5vw, 24px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--cream-60);
+      line-height: 1.6;
+      max-width: 560px;
+      margin: 0 auto 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .closing-quote em {
+      color: var(--cream);
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    .closing-cta-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* CONNECT LINKS */
+    .connect-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .connect-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg-card);
+      text-decoration: none;
+      transition: border-color 0.2s;
+    }
+
+    .connect-link:hover {
+      border-color: var(--border-mid);
+    }
+
+    .connect-link-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .connect-link-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--bg-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .connect-link-label {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: -0.01em;
+    }
+
+    .connect-link-sub {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--cream-35);
+    }
+
+    .connect-link-arrow {
+      font-size: 14px;
+      color: var(--cream-35);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--cream-35);
+      letter-spacing: -0.02em;
+    }
+
+    .footer-logo span {
+      color: var(--amber);
+      font-weight: 300;
+    }
+
+    .footer-copy {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--cream-15);
+      font-weight: 300;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="global-nav">
+    <a class="nav-logo" href="#">Sandeep <span>Pawar</span></a>
+    <div class="nav-links">
+      <a class="nav-link" href="index.html">Work</a>
+      <a class="nav-link active" href="about.html">About</a>
+      <a class="nav-link" href="blog.html">Blog</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </div>
+    <a class="nav-cta" href="contact.html">Say hello</a>
+  </nav>
+
+  <div class="page-content">
+
+    <!-- HERO -->
+    <div class="about-hero">
+      <div class="hero-left">
+        <div class="hero-eyebrow">About me</div>
+        <div class="hero-title">Sandeep</div>
+        <div class="hero-title-light">Pawar.</div>
+        <div class="hero-role-tag">UX Designer · Mumbai</div>
+        <div class="hero-desc">
+          I'm not trying to present perfect textbook UX projects —
+          I care more about <em>understanding how people actually work</em>
+          and designing solutions that genuinely make their day-to-day easier.
+        </div>
+        <div class="hero-actions">
+          <a class="btn-primary" href="#">Download resume ↓</a>
+          <a class="btn-secondary" href="#">Say hello →</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <!-- Headshot — portrait orientation, professional but warm -->
+        <!-- Professional headshot of Sandeep: clean background, warm lighting, looking at camera. Should feel editorial not corporate — natural, approachable. -->
+        <div class="photo-main">
+          <div class="photo-inner">
+            <span class="photo-icon">🧑</span>
+            <div class="photo-label">Professional headshot</div>
+            <div class="photo-dims">sandeep_headshot.jpg · Portrait · 3:4</div>
+          </div>
+        </div>
+        <!-- Candid — personality photo, music/guitar or casual -->
+        <!-- Candid photo of Sandeep: playing guitar, at a music session, or a natural moment that shows personality. Warm, relaxed, human. -->
+        <div class="photo-candid">
+          <div class="photo-inner">
+            <span class="photo-icon">🎸</span>
+            <div class="photo-label">Candid / personality photo</div>
+            <div class="photo-dims">sandeep_candid.jpg · Landscape · 4:3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MY STORY -->
+    <div class="about-section">
+      <div class="two-col-wide">
+        <div>
+          <div class="section-eyebrow">My story</div>
+          <div class="section-title">How a software test changed everything</div>
+          <div class="body-text">In 2019, I was working at a US-based BPO. They were setting up new software for a
+            process I was part of, and as one of the earliest employees, senior management put me through a testing
+            exercise for it. I didn't know it at the time — but I was a usability study participant.</div>
+          <div class="body-text">Something clicked during that process. <strong>I became fascinated by the gap between
+              how software was built and how people actually used it.</strong> That gap felt like a problem worth
+            solving.</div>
+          <div class="body-text">Then the pandemic happened. Like everyone else, I found myself with unexpected time. I
+            started the Google UX Design Certificate on Coursera — and struggled, genuinely, in the beginning. But I
+            stuck with it. That led to my first internship as a UI/UX design intern at Laqshya Media Group, where I got
+            to audit and redesign an enterprise SaaS platform from the inside.</div>
+          <div class="body-text">Since then, I've been the sole designer at a small product company — researching,
+            wireframing, testing, and shipping features for real users with real stakes. <strong>1.5 years of building
+              judgment in isolation. Now I'm looking for the right team to build it with.</strong></div>
+        </div>
+        <div>
+          <!-- Timeline -->
+          <div class="edu-list" style="margin-top:52px;">
+            <div class="edu-item">
+              <div class="edu-dot"></div>
+              <div>
+                <div class="edu-title">2019</div>
+                <div class="edu-sub">Accidental first encounter with usability testing at a BPO — the moment that
+                  started everything</div>
+              </div>
+            </div>
+            <div class="edu-item">
+              <div class="edu-dot"></div>
+              <div>
+                <div class="edu-title">2020</div>
+                <div class="edu-sub">Started Google UX Design Certificate on Coursera during the pandemic</div>
+              </div>
+            </div>
+            <div class="edu-item">
+              <div class="edu-dot"></div>
+              <div>
+                <div class="edu-title">2022</div>
+                <div class="edu-sub">First internship — UI/UX Designer at Laqshya Media Group. Audited and redesigned
+                  the SHARP platform.</div>
+              </div>
+            </div>
+            <div class="edu-item">
+              <div class="edu-dot"></div>
+              <div>
+                <div class="edu-title">2023 – Now</div>
+                <div class="edu-sub">Sole UX Designer at a small product company. Shipped VPP and Venya. Building
+                  judgment every day.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- APPROACH -->
+    <div class="about-section">
+      <div class="two-col">
+        <div>
+          <div class="section-eyebrow">My approach</div>
+          <div class="section-title">Design that fits the real world</div>
+          <div class="body-text">I start with the workflow, not the wireframe. Before I design anything, I want to
+            understand the actual constraints — the people, the process, the environment, the stakes. That's where the
+            real problems live.</div>
+          <div class="body-text">This isn't idealism. It's a practical instinct I developed early — from watching
+            cashiers at a fuel station reach for a paper sheet mid-task because the app hadn't shown them what they
+            needed, to discovering unpaid overtime that nobody had thought to mention in the brief.</div>
+          <div class="body-text"><strong>The best designs I've made didn't come from clever ideas. They came from paying
+              attention.</strong></div>
+        </div>
+        <div class="belief-grid">
+          <div class="belief-card">
+            <div class="belief-num">01</div>
+            <div class="belief-title">Go to where the work happens</div>
+            <div class="belief-desc">A site visit tells you more than a stakeholder meeting. Watching someone work
+              reveals what they've stopped noticing.</div>
+          </div>
+          <div class="belief-card">
+            <div class="belief-num">02</div>
+            <div class="belief-title">Name the constraint upfront</div>
+            <div class="belief-desc">Every project has real constraints. Naming them isn't an excuse — it's what makes
+              your process sound adaptive instead of chaotic.</div>
+          </div>
+          <div class="belief-card">
+            <div class="belief-num">03</div>
+            <div class="belief-title">Practical over perfect</div>
+            <div class="belief-desc">A solution that fits how people actually work is worth more than a polished design
+              that ignores the reality of their day.</div>
+          </div>
+          <div class="belief-card">
+            <div class="belief-num">04</div>
+            <div class="belief-title">Show the decisions, not just the output</div>
+            <div class="belief-desc">The screens are the skeleton. The decisions are the story. That's what actually
+              demonstrates design thinking.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKILLS & EDUCATION -->
+    <div class="about-section">
+      <div class="two-col">
+        <div>
+          <div class="section-eyebrow">Skills</div>
+          <div class="section-title">What I bring</div>
+          <div class="skills-grid">
+            <div class="skill-group">
+              <div class="skill-group-label">Research</div>
+              <div class="skill-tags">
+                <span class="skill-tag">User interviews</span>
+                <span class="skill-tag">Contextual inquiry</span>
+                <span class="skill-tag">Heuristic evaluation</span>
+                <span class="skill-tag">Usability testing</span>
+                <span class="skill-tag">Content audit</span>
+                <span class="skill-tag">Empathy mapping</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <div class="skill-group-label">Design</div>
+              <div class="skill-tags">
+                <span class="skill-tag">User flows</span>
+                <span class="skill-tag">Wireframing</span>
+                <span class="skill-tag">Hi-fi prototyping</span>
+                <span class="skill-tag">UI design</span>
+                <span class="skill-tag">Design systems</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <div class="skill-group-label">Tools</div>
+              <div class="skill-tags">
+                <span class="skill-tag">Figma</span>
+                <span class="skill-tag">FigJam</span>
+                <span class="skill-tag">Framer</span>
+                <span class="skill-tag">Notion</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <div class="skill-group-label">Soft skills</div>
+              <div class="skill-tags">
+                <span class="skill-tag">Stakeholder communication</span>
+                <span class="skill-tag">Cross-functional collaboration</span>
+                <span class="skill-tag">Dev handoff</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="section-eyebrow" style="margin-bottom:8px;">Education & certifications</div>
+          <div class="section-title">How I got here</div>
+          <div class="edu-list">
+            <div class="edu-item">
+              <div class="edu-dot"></div>
+              <div>
+                <div class="edu-title">Google UX Design Certificate</div>
+                <div class="edu-sub">Coursera · Completed 2021</div>
+              </div>
+            </div>
+            <div class="edu-item">
+              <div class="edu-dot"></div>
+              <div>
+                <div class="edu-title">UX Design Mentorship</div>
+                <div class="edu-sub">Growthschool · Mentored by Anudeep Ayyagari</div>
+              </div>
+            </div>
+            <div class="edu-item">
+              <div class="edu-dot"></div>
+              <div>
+                <div class="edu-title">BSc Information Technology</div>
+                <div class="edu-sub">Mumbai University · Discontinued</div>
+              </div>
+            </div>
+            <div class="edu-item">
+              <div class="edu-dot"></div>
+              <div>
+                <div class="edu-title">Higher Secondary — Commerce</div>
+                <div class="edu-sub">Mumbai · 2018</div>
+              </div>
+            </div>
+          </div>
+          <div
+            style="margin-top:16px;padding:14px 18px;border:1px solid var(--border);border-radius:12px;background:var(--bg-card);">
+            <div
+              style="font-family:var(--font-body);font-size:12px;font-weight:300;color:var(--cream-60);line-height:1.6;">
+              Born and brought up in <strong style="color:var(--cream);font-weight:500;">Mumbai</strong> — the city that
+              taught me that the best ideas come from watching how people actually navigate complexity.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OUTSIDE OF DESIGN -->
+    <div class="about-section">
+      <div class="section-eyebrow">Outside of design</div>
+      <div class="section-title">The other things that make me think</div>
+      <div class="body-text" style="max-width:600px;">Design and music have more in common than people think. Both are
+        about understanding what the other person needs to feel — and removing everything that gets in the way of that.
+      </div>
+      <div class="interest-row">
+        <div class="interest-pill"><span>🎸</span> Guitar</div>
+        <div class="interest-pill"><span>🪕</span> Ukulele</div>
+        <div class="interest-pill"><span>🎵</span> Music</div>
+        <div class="interest-pill"><span>📷</span> Photography</div>
+        <div class="interest-pill"><span>🌆</span> Mumbai</div>
+      </div>
+    </div>
+
+    <!-- WHAT I'M LOOKING FOR -->
+    <div class="about-section">
+      <div class="section-eyebrow">What I'm looking for</div>
+      <div class="section-title">The right team</div>
+      <div class="two-col-wide">
+        <div class="looking-card">
+          <div class="looking-title">A team where design is taken seriously — and I can learn from people who've been
+            doing it longer than me.</div>
+          <div class="looking-text">I'm looking to join an established team of experienced UX designers where real-world
+            practice is the norm, not the exception. I want to be in an environment where I'm challenged, mentored, and
+            held to a standard I haven't reached yet.</div>
+          <div class="looking-text">I'm adaptive by nature — I can adjust to different team cultures, paces, and problem
+            domains. But the one thing that matters most to me is <strong>UX maturity.</strong> A team that believes in
+            research, values process, and knows that good design takes more than one round of feedback.</div>
+          <div class="target-row">
+            <span class="target-pill">UX agencies</span>
+            <span class="target-pill">Product companies</span>
+            <span class="target-pill">Mumbai · Hybrid · Remote</span>
+            <span class="target-pill">Ungrammary · Lollipop · Onething · Groww · Razorpay</span>
+          </div>
+        </div>
+        <div>
+          <div class="connect-links">
+            <a class="connect-link" href="#">
+              <div class="connect-link-left">
+                <div class="connect-link-icon">💼</div>
+                <div>
+                  <div class="connect-link-label">LinkedIn</div>
+                  <div class="connect-link-sub">Sandeep Pawar</div>
+                </div>
+              </div>
+              <span class="connect-link-arrow">↗</span>
+            </a>
+            <a class="connect-link" href="#">
+              <div class="connect-link-left">
+                <div class="connect-link-icon">✉️</div>
+                <div>
+                  <div class="connect-link-label">Email</div>
+                  <div class="connect-link-sub">sandeep@email.com</div>
+                </div>
+              </div>
+              <span class="connect-link-arrow">↗</span>
+            </a>
+            <a class="connect-link" href="#">
+              <div class="connect-link-left">
+                <div class="connect-link-icon">📄</div>
+                <div>
+                  <div class="connect-link-label">Resume</div>
+                  <div class="connect-link-sub">Download PDF</div>
+                </div>
+              </div>
+              <span class="connect-link-arrow">↓</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLOSING LINE -->
+    <div class="about-section" style="border-bottom:none;padding-bottom:0;">
+      <div class="closing-strip">
+        <div class="closing-quote">
+          "I've spent the last 1.5 years building judgment in isolation —
+          now I want to build it in <em>the right company.</em>"
+        </div>
+        <div class="closing-cta-row">
+          <a class="btn-primary" href="#">View my work →</a>
+          <a class="btn-secondary" href="#">Say hello</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-logo">Sandeep <span>Pawar</span></div>
+    <div class="footer-copy">© 2024 Sandeep Pawar · Mumbai</div>
+  </footer>
+
+  <script>
+    // placeholder — no JS needed for this page
+  </script>
+</body>
+
+</html>

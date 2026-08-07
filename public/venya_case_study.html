@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@100,200,300,400,500,700,800,900&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #141210;
+  --bg-2: #1C1914;
+  --bg-3: #221F1B;
+  --bg-card: #1A1714;
+  --cream: #F0E8D8;
+  --cream-60: rgba(240,232,216,0.6);
+  --cream-35: rgba(240,232,216,0.35);
+  --cream-15: rgba(240,232,216,0.15);
+  --cream-08: rgba(240,232,216,0.08);
+  --cream-04: rgba(240,232,216,0.04);
+  --amber: #B48246;
+  --amber-light: #C49A5A;
+  --amber-muted: rgba(180,130,70,0.15);
+  --amber-border: rgba(180,130,70,0.25);
+  --border: rgba(240,232,216,0.08);
+  --border-mid: rgba(240,232,216,0.12);
+  --green-muted: rgba(74,155,111,0.15);
+  --green-border: rgba(74,155,111,0.25);
+  --font-display: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif;
+  --font-body: 'Satoshi', 'Inter', sans-serif;
+  --transition: 280ms ease;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--cream);
+  font-family: var(--font-body); font-size: 15px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- GLOBAL NAV ---- */
+.global-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(20,18,16,0.92); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 40px; height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  font-family: var(--font-display); font-size: 15px; font-weight: 700;
+  color: var(--cream); letter-spacing: -0.02em; text-decoration: none;
+}
+.nav-logo span { color: var(--amber); font-weight: 300; }
+.nav-back {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-body); font-size: 12px; font-weight: 400;
+  color: var(--cream-35); text-decoration: none; letter-spacing: 0.02em;
+}
+
+/* ---- CS BAR ---- */
+.cs-bar {
+  position: fixed; top: 56px; left: 0; right: 0; z-index: 190;
+  background: rgba(20,18,16,0.95); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  height: 64px; padding: 0 40px;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+}
+.cs-bar-left { display: flex; align-items: center; }
+.cs-bar-num {
+  font-family: var(--font-body); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream-35);
+}
+.cs-bar-centre { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.cs-toggle {
+  display: inline-flex; align-items: center;
+  background: var(--bg-3); border: 1px solid var(--border);
+  border-radius: 999px; padding: 3px; gap: 2px;
+}
+.toggle-btn {
+  padding: 5px 16px; border-radius: 999px;
+  font-family: var(--font-body); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--cream-35); background: transparent; border: none; cursor: pointer;
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+}
+.toggle-btn.active { background: var(--bg-2); color: var(--cream); box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+.cs-bar-right { display: flex; justify-content: flex-end; }
+
+/* ---- PAGE CONTENT ---- */
+.page-content {
+  padding-top: 120px; max-width: 860px; margin: 0 auto;
+  padding-left: 40px; padding-right: 40px; padding-bottom: 120px;
+}
+
+/* ---- SECTIONS ---- */
+.cs-section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+.cs-section:last-of-type { border-bottom: none; }
+.cs-section-num {
+  font-family: var(--font-body); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); margin-bottom: 8px;
+}
+.cs-section-title {
+  font-family: var(--font-display); font-size: 28px; font-weight: 700;
+  letter-spacing: -0.025em; color: var(--cream); line-height: 1.1; margin-bottom: 8px;
+}
+.cs-section-subtitle {
+  font-family: var(--font-body); font-size: 14px; font-weight: 300;
+  color: var(--cream-60); line-height: 1.7; margin-bottom: 32px; max-width: 600px;
+}
+
+/* ---- HERO ---- */
+.cs-hero { padding: 48px 0 0; }
+.cs-hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 14px; background: var(--amber-muted); border: 1px solid var(--amber-border);
+  border-radius: 999px; font-family: var(--font-body); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber-light); margin-bottom: 24px;
+}
+.cs-hero-title {
+  font-family: var(--font-display); font-size: clamp(36px, 5vw, 52px);
+  font-weight: 800; letter-spacing: -0.04em; line-height: 0.95;
+  color: var(--cream); margin-bottom: 24px;
+}
+.cs-hero-title span { font-weight: 200; color: var(--cream-60); }
+.cs-hero-meta { display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 32px; }
+.cs-meta-item { display: flex; flex-direction: column; gap: 3px; }
+.cs-meta-label {
+  font-family: var(--font-body); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--cream-35);
+}
+.cs-meta-value { font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--cream-60); }
+.cs-hero-constraint-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px; }
+.cs-constraint {
+  padding: 5px 12px; background: var(--cream-04); border: 1px solid var(--border);
+  border-radius: 999px; font-family: var(--font-body); font-size: 11px; color: var(--cream-35);
+}
+
+/* ---- IMAGE PLACEHOLDERS ---- */
+.img-placeholder {
+  width: 100%; background: var(--bg-3);
+  border: 1px solid var(--border); border-radius: 16px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.img-placeholder::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(240,232,216,0.03) 39px, rgba(240,232,216,0.03) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(240,232,216,0.03) 39px, rgba(240,232,216,0.03) 40px);
+}
+.img-placeholder-inner { position: relative; z-index: 1; text-align: center; padding: 24px; }
+.img-ph-icon { font-size: 28px; margin-bottom: 10px; display: block; opacity: 0.4; }
+.img-ph-label {
+  font-family: var(--font-display); font-size: 16px; font-weight: 700;
+  color: var(--cream-35); letter-spacing: -0.01em; margin-bottom: 4px;
+}
+.img-ph-desc {
+  font-family: var(--font-body); font-size: 11px; font-weight: 400;
+  color: var(--cream-15); letter-spacing: 0.04em;
+}
+.img-ph-dims {
+  font-family: var(--font-body); font-size: 10px; font-weight: 500;
+  color: var(--cream-15); margin-top: 10px; letter-spacing: 0.06em;
+  padding: 3px 10px; border: 1px solid var(--border); border-radius: 999px; display: inline-block;
+}
+
+/* Aspect ratios */
+.aspect-hero    { aspect-ratio: 16/7; }
+.aspect-wide    { aspect-ratio: 16/9; }
+.aspect-mobile  { aspect-ratio: 4/3; }
+.aspect-tall    { aspect-ratio: 3/4; }
+.aspect-square  { aspect-ratio: 1/1; }
+
+/* Grid layouts for images */
+.img-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.img-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.img-grid-featured { display: grid; grid-template-columns: 3fr 2fr; gap: 12px; }
+
+.img-caption {
+  font-family: var(--font-body); font-size: 12px; font-weight: 300;
+  color: var(--cream-35); margin-top: 10px; line-height: 1.5; padding-left: 4px;
+}
+.img-caption-story { display: none; font-style: italic; color: var(--amber-light); }
+body.story-mode .img-caption-story { display: block; }
+body.story-mode .img-caption-scan { display: none; }
+
+/* ---- SCAN ELEMENTS ---- */
+.scan-sublabel {
+  font-family: var(--font-body); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--cream-35); margin-bottom: 8px; margin-top: 20px;
+}
+.scan-sublabel:first-of-type { margin-top: 0; }
+ul.scan-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+ul.scan-list li {
+  font-family: var(--font-body); font-size: 13px; font-weight: 300;
+  color: var(--cream-60); line-height: 1.6; padding-left: 14px; position: relative;
+}
+ul.scan-list li::before { content: "–"; position: absolute; left: 0; color: var(--cream-35); }
+.scan-divider { height: 1px; background: var(--border); margin: 16px 0; }
+
+.problem-statement {
+  padding: 16px 20px; background: var(--bg-2); border: 1px solid var(--border-mid);
+  border-radius: 16px; margin-bottom: 20px;
+  font-family: var(--font-body); font-size: 14px; font-weight: 400;
+  color: var(--cream); line-height: 1.6;
+}
+.problem-statement strong { color: var(--amber); font-weight: 500; }
+
+/* ---- PERSONA CARD ---- */
+.persona-card {
+  border: 1px solid var(--border); border-radius: 16px;
+  overflow: hidden; background: var(--bg-card); margin-top: 24px;
+}
+.persona-head {
+  padding: 16px 20px; background: var(--bg-2); border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 16px;
+}
+.persona-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--amber-muted); border: 1px solid var(--amber-border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--amber);
+  flex-shrink: 0;
+}
+.persona-name {
+  font-family: var(--font-display); font-size: 17px; font-weight: 700;
+  color: var(--cream); letter-spacing: -0.01em;
+}
+.persona-title {
+  font-family: var(--font-body); font-size: 12px; font-weight: 400;
+  color: var(--cream-35); margin-top: 2px;
+}
+.persona-quote {
+  padding: 16px 20px; border-bottom: 1px solid var(--border);
+  font-family: var(--font-display); font-size: 14px; font-weight: 400; font-style: italic;
+  color: var(--cream-60); line-height: 1.6;
+}
+.persona-body {
+  display: grid; grid-template-columns: 1fr 1fr; padding: 0;
+}
+.persona-col { padding: 16px 20px; border-right: 1px solid var(--border); }
+.persona-col:last-child { border-right: none; }
+.persona-col-label {
+  font-family: var(--font-body); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); margin-bottom: 10px;
+}
+.persona-item {
+  font-family: var(--font-body); font-size: 12px; font-weight: 300;
+  color: var(--cream-60); line-height: 1.7; padding-left: 12px; position: relative; margin-bottom: 4px;
+}
+.persona-item::before { content: "–"; position: absolute; left: 0; color: var(--cream-35); }
+
+/* ---- DECISION CARDS ---- */
+.decision-cards { display: flex; flex-direction: column; gap: 12px; }
+.dc { border: 1px solid var(--border); border-radius: 16px; overflow: hidden; background: var(--bg-card); }
+.dc-head {
+  padding: 14px 20px; background: var(--bg-2); border-bottom: 1px solid var(--border);
+  font-family: var(--font-display); font-size: 15px; font-weight: 700;
+  color: var(--cream); letter-spacing: -0.02em; line-height: 1.3;
+}
+.dc-row {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 11px 20px; border-bottom: 1px solid var(--border);
+}
+.dc-row:last-child { border-bottom: none; }
+.dc-tag {
+  font-family: var(--font-body); font-size: 10px; font-weight: 500;
+  padding: 2px 9px; border-radius: 999px; flex-shrink: 0;
+  letter-spacing: 0.06em; text-transform: uppercase; margin-top: 1px;
+}
+.tag-found    { background: var(--green-muted); color: #7DC98A; border: 1px solid var(--green-border); }
+.tag-chose    { background: var(--amber-muted); color: var(--amber-light); border: 1px solid var(--amber-border); }
+.tag-rejected { background: var(--cream-04); color: var(--cream-35); border: 1px solid var(--border); }
+.dc-text { font-family: var(--font-body); font-size: 13px; font-weight: 300; color: var(--cream-60); line-height: 1.6; }
+.dc-scan-body {}
+.dc-story-body { padding: 16px 20px; display: none; }
+.dc-story-body p { font-family: var(--font-body); font-size: 14px; font-weight: 300; color: var(--cream-60); line-height: 1.8; }
+.dc-story-body p strong { color: var(--cream); font-weight: 500; }
+
+/* ---- INSIGHT CARDS ---- */
+.insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+.insight-card { border: 1px solid var(--border); border-radius: 16px; padding: 20px; background: var(--bg-card); }
+.insight-cat {
+  font-family: var(--font-body); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); margin-bottom: 8px;
+}
+.insight-finding {
+  font-family: var(--font-display); font-size: 15px; font-weight: 600;
+  color: var(--cream); line-height: 1.3; letter-spacing: -0.01em; margin-bottom: 10px;
+}
+.insight-source {
+  font-family: var(--font-body); font-size: 11px; color: var(--cream-35); font-weight: 400;
+  padding: 3px 10px; background: var(--cream-04); border: 1px solid var(--border);
+  border-radius: 999px; display: inline-block;
+}
+.insight-expansion {
+  font-family: var(--font-body); font-size: 13px; font-weight: 300;
+  color: var(--cream-60); line-height: 1.7; margin-top: 10px; padding-top: 10px;
+  border-top: 1px solid var(--border); display: none;
+}
+
+/* ---- REFERENCE CARDS ---- */
+.reference-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 8px; }
+.reference-card {
+  border: 1px solid var(--border); border-radius: 14px;
+  padding: 16px 18px; background: var(--bg-card);
+}
+.ref-name {
+  font-family: var(--font-display); font-size: 16px; font-weight: 700;
+  color: var(--cream); letter-spacing: -0.02em; margin-bottom: 4px;
+}
+.ref-use {
+  font-family: var(--font-body); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--amber); margin-bottom: 6px;
+}
+.ref-desc {
+  font-family: var(--font-body); font-size: 12px; font-weight: 300;
+  color: var(--cream-60); line-height: 1.6;
+}
+
+/* ---- METRIC STRIP ---- */
+.metric-strip {
+  display: flex; gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 24px;
+}
+.metric-item { flex: 1; padding: 16px 20px; background: var(--bg-card); }
+.metric-val {
+  font-family: var(--font-body); font-size: 28px; font-weight: 700;
+  color: var(--amber); letter-spacing: -0.04em; line-height: 1;
+}
+.metric-lbl {
+  font-family: var(--font-body); font-size: 10px; font-weight: 400;
+  color: var(--cream-35); margin-top: 4px; letter-spacing: 0.06em; text-transform: uppercase;
+}
+.metric-context {
+  font-family: var(--font-body); font-size: 12px; font-weight: 300;
+  color: var(--cream-60); line-height: 1.6; margin-top: 6px; display: none;
+}
+
+/* ---- HIGHLIGHT BLOCK ---- */
+.highlight-block {
+  border-left: 2px solid var(--amber); padding: 14px 20px;
+  background: var(--amber-muted); border-radius: 0 12px 12px 0;
+  font-family: var(--font-body); font-style: italic;
+  font-size: 15px; font-weight: 300; color: var(--cream-60);
+  line-height: 1.7; margin-top: 24px; display: none;
+}
+
+/* ---- TESTING ---- */
+.testing-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.testing-col { border: 1px solid var(--border); border-radius: 16px; padding: 20px; background: var(--bg-card); }
+.testing-col-label {
+  font-family: var(--font-body); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--cream-35); margin-bottom: 12px;
+}
+.testing-story { display: none; flex-direction: column; gap: 20px; }
+.testing-story-label {
+  font-family: var(--font-body); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber); margin-bottom: 6px;
+}
+.testing-story-text {
+  font-family: var(--font-body); font-size: 14px; font-weight: 300;
+  color: var(--cream-60); line-height: 1.8;
+}
+.testing-story-text strong { color: var(--cream); font-weight: 500; }
+
+/* ---- FORESIGHT ---- */
+.foresight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.foresight-card { border: 1px solid var(--border); border-radius: 16px; padding: 20px; background: var(--bg-card); }
+.foresight-label {
+  font-family: var(--font-body); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--cream-35); margin-bottom: 8px;
+}
+.foresight-text { font-family: var(--font-body); font-size: 13px; font-weight: 300; color: var(--cream-60); line-height: 1.7; }
+.foresight-story { font-family: var(--font-body); font-size: 14px; font-weight: 300; color: var(--cream-60); line-height: 1.8; display: none; }
+.foresight-story strong { color: var(--cream); font-weight: 500; }
+
+/* ---- TAKEAWAY CARDS ---- */
+.takeaway-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 0; }
+.takeaway-card { border: 1px solid var(--border); border-radius: 14px; padding: 18px; background: var(--bg-card); }
+.takeaway-num {
+  font-family: var(--font-body); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); margin-bottom: 8px;
+}
+.takeaway-title {
+  font-family: var(--font-display); font-size: 14px; font-weight: 700;
+  color: var(--cream); letter-spacing: -0.01em; margin-bottom: 6px; line-height: 1.3;
+}
+.takeaway-desc {
+  font-family: var(--font-body); font-size: 12px; font-weight: 300;
+  color: var(--cream-60); line-height: 1.6;
+}
+
+/* ---- NEXT PROJECT ---- */
+.next-project {
+  display: flex; align-items: center; justify-content: space-between;
+  border: 1px solid var(--border); border-radius: 20px; padding: 32px;
+  background: var(--bg-2); cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s; text-decoration: none; margin-top: 64px;
+}
+.next-project:hover { border-color: var(--border-mid); transform: translateY(-2px); }
+.next-label {
+  font-family: var(--font-body); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--cream-35); margin-bottom: 6px;
+}
+.next-title {
+  font-family: var(--font-display); font-size: 22px; font-weight: 700;
+  letter-spacing: -0.025em; color: var(--cream);
+}
+.next-arrow {
+  width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border-mid);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; color: var(--cream-60); flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.next-project:hover .next-arrow { background: var(--amber-muted); border-color: var(--amber-border); color: var(--amber-light); }
+
+/* ---- STORY MODE TOGGLES ---- */
+body.story-mode .dc-scan-body { display: none; }
+body.story-mode .dc-story-body { display: block; }
+body.story-mode .insight-expansion { display: block; }
+body.story-mode .metric-context { display: block; }
+body.story-mode .highlight-block { display: block; }
+body.story-mode .testing-grid { display: none; }
+body.story-mode .testing-story { display: flex; }
+body.story-mode .foresight-grid { display: none; }
+body.story-mode .foresight-story { display: block; }
+</style>
+</head>
+<body>
+
+<nav class="global-nav">
+  <a class="nav-logo" href="#">Sandeep <span>Pawar</span></a>
+  <a class="nav-back" href="#">← Back to work</a>
+</nav>
+
+<div class="cs-bar">
+  <div class="cs-bar-left"><span class="cs-bar-num">03 / 03</span></div>
+  <div class="cs-bar-centre">
+    <div class="cs-toggle">
+      <button class="toggle-btn active" id="btn-scan" onclick="setMode('scan')">Recruiter Scan Mode</button>
+      <button class="toggle-btn" id="btn-story" onclick="setMode('story')">Full Story</button>
+    </div>
+  </div>
+  <div class="cs-bar-right"></div>
+</div>
+
+<div class="page-content">
+
+  <!-- ============ HERO ============ -->
+  <div class="cs-hero">
+    <div class="cs-hero-tag">UI Craft · Luxury · PropTech · Mobile</div>
+    <div class="cs-hero-title">Luxury villa <span>booking</span><br>for investors</div>
+    <div class="cs-hero-meta">
+      <div class="cs-meta-item"><span class="cs-meta-label">Role</span><span class="cs-meta-value">Sole UI Designer</span></div>
+      <div class="cs-meta-item"><span class="cs-meta-label">Client</span><span class="cs-meta-value">Equity Address</span></div>
+      <div class="cs-meta-item"><span class="cs-meta-label">Platform</span><span class="cs-meta-value">iOS · Android</span></div>
+      <div class="cs-meta-item"><span class="cs-meta-label">Timeline</span><span class="cs-meta-value">3 weeks · 2024</span></div>
+      <div class="cs-meta-item"><span class="cs-meta-label">Users</span><span class="cs-meta-value">Investors aged 25–60</span></div>
+    </div>
+    <div class="cs-hero-constraint-row">
+      <span class="cs-constraint">No direct user access</span>
+      <span class="cs-constraint">No existing design system</span>
+      <span class="cs-constraint">3-week timeline</span>
+      <span class="cs-constraint">Complex investment-linked payments</span>
+      <span class="cs-constraint">High-stakes luxury audience</span>
+    </div>
+
+    <!-- Hero image — full width luxury app banner -->
+    <!-- Wide banner: premium dark/navy aesthetic, app screens floating, Venya wordmark, luxury villa imagery -->
+    <div class="img-placeholder aspect-hero">
+      <div class="img-placeholder-inner">
+        <span class="img-ph-icon">🖼</span>
+        <div class="img-ph-label">Hero Banner</div>
+        <div class="img-ph-desc">Venya_Hero.jpg · Full-width project banner</div>
+        <div class="img-ph-dims">1600 × 700 · Wide landscape · App screens on dark/luxury background</div>
+      </div>
+    </div>
+    <div class="img-caption img-caption-scan">Venya — Luxury Villa Booking App for Equity Address investors.</div>
+    <div class="img-caption img-caption-story">The brief was to digitise a phone-based booking process without losing the premium feel the investors expected from a luxury real estate brand.</div>
+  </div>
+
+  <!-- ============ S01 — THE PROBLEM ============ -->
+  <div class="cs-section">
+    <div class="cs-section-num">01 — The problem</div>
+    <div class="cs-section-title">A luxury product with a broken booking experience</div>
+    <div class="cs-section-subtitle">Investors who owned high-value properties had no self-serve way to book or manage their villa stays.</div>
+
+    <div class="problem-statement">
+      Equity Address investors needed a way to book luxury villas using their <strong>rental income</strong> — replacing a manual phone-based process with a digital experience that felt <strong>premium, trustworthy, and clear about complex investment-linked payments.</strong>
+    </div>
+
+    <div class="scan-sublabel">What the phone-based process caused</div>
+    <ul class="scan-list">
+      <li>Multiple back-and-forth calls just to check availability and pricing</li>
+      <li>No visibility into which properties were available or how rental income applied</li>
+      <li>Payment structure — deductions, price differences, payment methods — explained only verbally</li>
+      <li>Experience felt mismatched with the premium product investors had paid for</li>
+    </ul>
+
+    <div class="scan-divider"></div>
+
+    <div class="scan-sublabel">The harder design challenge</div>
+    <ul class="scan-list">
+      <li>Build a UI that feels luxury-grade while making a genuinely complex payment structure feel effortless</li>
+      <li>Users aged 25–60 — app-comfortable but not tech-enthusiasts — would notice immediately if anything felt off</li>
+    </ul>
+
+    <div class="highlight-block">The design challenge wasn't just "build a booking app." It was: make a genuinely complex financial structure feel effortless inside a premium UI.</div>
+  </div>
+
+  <!-- ============ S02 — USER & CONTEXT ============ -->
+  <div class="cs-section">
+    <div class="cs-section-num">02 — User & context</div>
+    <div class="cs-section-title">Who we designed for</div>
+    <div class="cs-section-subtitle">No direct user access — all insight came through the founders. The persona was built from founder interviews and knowledge of their investor base.</div>
+
+    <div class="persona-card">
+      <div class="persona-head">
+        <div class="persona-avatar">R</div>
+        <div>
+          <div class="persona-name">Rajesh Malhotra</div>
+          <div class="persona-title">Managing Director · 47 · Mumbai · Moderate tech proficiency</div>
+        </div>
+      </div>
+      <div class="persona-quote">
+        "I just want to book a villa without calling back and forth or trying to figure out how my rental income actually applies to the payment."
+      </div>
+      <div class="persona-body">
+        <div class="persona-col">
+          <div class="persona-col-label">Goals</div>
+          <div class="persona-item">Book villas using rental income without confusion</div>
+          <div class="persona-item">Compare properties quickly based on dates and preferences</div>
+          <div class="persona-item">Understand pricing and payment breakdown clearly</div>
+        </div>
+        <div class="persona-col">
+          <div class="persona-col-label">Frustrations</div>
+          <div class="persona-item">Phone-based booking is slow with too many follow-up calls</div>
+          <div class="persona-item">Complex payment structure isn't explained anywhere</div>
+          <div class="persona-item">No visibility into availability without calling</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-grid">
+      <div class="insight-card">
+        <div class="insight-cat">Founder interview</div>
+        <div class="insight-finding">Payment confusion was the most common friction point on investor calls</div>
+        <span class="insight-source">Daily Zoom calls</span>
+        <div class="insight-expansion">Founders confirmed investors were frequently confused about how their rental income balance applied, what the price difference meant, and which payment method to use. This confusion lived in phone conversations — nowhere in the current process was it documented or explained.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-cat">Founder interview</div>
+        <div class="insight-finding">First impressions were non-negotiable — the UI had to signal premium quality immediately</div>
+        <span class="insight-source">Client brief</span>
+        <div class="insight-expansion">The investors had made significant property purchases. A UI that felt cheap or generic would immediately damage trust. The founders were explicit: the app had to feel like the brand. This shaped every visual decision from typography to spacing to imagery.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-cat">Constraint</div>
+        <div class="insight-finding">Founders were the only source of user insight — no direct investor access</div>
+        <span class="insight-source">Project constraint</span>
+        <div class="insight-expansion">All design decisions were validated through founders, not users. This is a real limitation. Founders know their product deeply — but they interpret user needs through their own lens. It was a constraint worth naming, not hiding.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-cat">Payment logic</div>
+        <div class="insight-finding">Investors could use rental income, but price differences required additional payment methods</div>
+        <span class="insight-source">Founder briefing</span>
+        <div class="insight-expansion">If an investor chose a villa that cost more than their rental balance, they had to cover the difference via cash, cheque, or bank transfer. This wasn't simple — it needed its own dedicated UI treatment, not an afterthought in the booking flow.</div>
+      </div>
+    </div>
+
+    <div class="highlight-block">Founders know their product deeply — but they're not their users. Every decision was made on logic and reference, not observed behaviour. That's a constraint worth naming honestly.</div>
+  </div>
+
+  <!-- ============ S03 — DESIGN APPROACH ============ -->
+  <div class="cs-section">
+    <div class="cs-section-num">03 — Design approach</div>
+    <div class="cs-section-title">Building on what investors already knew</div>
+    <div class="cs-section-subtitle">With no design system and a 3-week timeline, I built on established mental models rather than inventing new ones.</div>
+
+    <div class="scan-sublabel">Reference systems used</div>
+    <div class="reference-row">
+      <div class="reference-card">
+        <div class="ref-name">Airbnb</div>
+        <div class="ref-use">Booking flows</div>
+        <div class="ref-desc">Property search, date selection, and booking confirmation patterns — familiar to app users across age groups.</div>
+      </div>
+      <div class="reference-card">
+        <div class="ref-name">MakeMyTrip</div>
+        <div class="ref-use">Property presentation</div>
+        <div class="ref-desc">How to display property details, amenities, and pricing in a way that feels trustworthy and scannable.</div>
+      </div>
+      <div class="reference-card">
+        <div class="ref-name">Shopify Polaris</div>
+        <div class="ref-use">UI consistency</div>
+        <div class="ref-desc">Component patterns for forms, inputs, and data display — gave consistency without needing to build a system from scratch.</div>
+      </div>
+    </div>
+
+    <div class="scan-divider"></div>
+
+    <!-- App screens overview — hero/onboarding screens -->
+    <!-- Mobile screens: splash/login, home/property listing, property detail hero -->
+    <div class="scan-sublabel">App overview — key screens</div>
+    <div class="img-grid-2" style="margin-top:10px">
+      <div class="img-placeholder aspect-wide">
+        <div class="img-placeholder-inner">
+          <span class="img-ph-icon">📱</span>
+          <div class="img-ph-label">Onboarding & Home</div>
+          <div class="img-ph-desc">Venya_Onboarding.jpg · Splash, login, property listing screens</div>
+          <div class="img-ph-dims">800 × 450 · 2–3 mobile screens side by side</div>
+        </div>
+      </div>
+      <div class="img-placeholder aspect-wide">
+        <div class="img-placeholder-inner">
+          <span class="img-ph-icon">🏡</span>
+          <div class="img-ph-label">Property Listing</div>
+          <div class="img-ph-desc">Venya_Listing.jpg · Property cards with imagery, pricing, availability</div>
+          <div class="img-ph-dims">800 × 450 · Property grid or list view screens</div>
+        </div>
+      </div>
+    </div>
+    <div class="img-caption img-caption-scan">Familiar booking patterns — property listing and search flow built on Airbnb and MakeMyTrip mental models.</div>
+    <div class="img-caption img-caption-story">Familiarity was a feature, not a shortcut. For a non-tech-enthusiast audience making high-value decisions, recognisable patterns lower cognitive load at exactly the moment it matters most.</div>
+
+    <div class="highlight-block">Familiarity was a feature, not a shortcut. For an audience that values clarity over cleverness, recognisable patterns reduce cognitive load at the moment decisions are made.</div>
+  </div>
+
+  <!-- ============ S04 — KEY DECISIONS ============ -->
+  <div class="cs-section">
+    <div class="cs-section-num">04 — Key decisions</div>
+    <div class="cs-section-title">What I chose and why</div>
+
+    <div class="decision-cards">
+
+      <div class="dc">
+        <div class="dc-head">Why I designed the property details page first</div>
+        <div class="dc-scan-body">
+          <div class="dc-row"><span class="dc-tag tag-found">Found</span><span class="dc-text">Every flow in the app either leads to or comes from the property details page — this is where high-value booking decisions happen</span></div>
+          <div class="dc-row"><span class="dc-tag tag-chose">Chose</span><span class="dc-text">Designed the property details page first, then built all other flows around it — imagery → amenities → pricing → payment options in a logical decision sequence</span></div>
+        </div>
+        <div class="dc-story-body"><p>Every screen in the app either leads to or comes from the property details page. This is where investors decide — which villa, which dates, how much it costs, how payment works. I designed this page first and built all other flows around it. The structure: imagery at the top to establish premium feel, followed by amenities, pricing, and payment options in a logical decision sequence. <strong>The most critical screen shaped everything else.</strong></p></div>
+      </div>
+
+      <div class="dc">
+        <div class="dc-head">Why I used reference systems instead of designing from scratch</div>
+        <div class="dc-scan-body">
+          <div class="dc-row"><span class="dc-tag tag-found">Constraint</span><span class="dc-text">No design system, 3-week timeline, non-tech-enthusiast users who value clarity over novelty</span></div>
+          <div class="dc-row"><span class="dc-tag tag-rejected">Rejected</span><span class="dc-text">Novel UI patterns — would have introduced unfamiliar interactions for an audience that needs to trust the interface immediately</span></div>
+          <div class="dc-row"><span class="dc-tag tag-chose">Chose</span><span class="dc-text">Airbnb + MakeMyTrip for booking flows, Shopify Polaris for UI consistency — built trust through recognition, not novelty</span></div>
+        </div>
+        <div class="dc-story-body"><p>With a 3-week timeline and no design system, I had a choice: invent something new or build on what investors already knew how to use. Novel UI patterns carry a learning cost — for an audience that values clarity over cleverness, that cost wasn't worth it. Airbnb and MakeMyTrip for booking flows, Polaris for consistency. <strong>Familiarity was a feature, not a shortcut.</strong></p></div>
+      </div>
+
+      <div class="dc">
+        <div class="dc-head">Why I broke the payment flow into a step-by-step structure</div>
+        <div class="dc-scan-body">
+          <div class="dc-row"><span class="dc-tag tag-found">Found</span><span class="dc-text">Payment logic — rental deductions, price differences, multiple payment methods — was the biggest source of confusion on investor calls</span></div>
+          <div class="dc-row"><span class="dc-tag tag-rejected">Rejected</span><span class="dc-text">Showing all payment options at once — would have overwhelmed users unfamiliar with the investment-linked structure</span></div>
+          <div class="dc-row"><span class="dc-tag tag-chose">Chose</span><span class="dc-text">Step-by-step flow — surfaced only the relevant payment option based on the investor's portfolio balance</span></div>
+        </div>
+        <div class="dc-story-body"><p>The payment logic was genuinely complex. Investors could use rental income, but if the villa cost more than their available balance, they had to cover the difference via cash, cheque, or bank transfer. Showing all of this at once would have recreated the confusion that existed on phone calls. A step-by-step structure surfaced only what was relevant at each moment. <strong>The UI made the decision — not the user.</strong></p></div>
+      </div>
+
+      <div class="dc">
+        <div class="dc-head">Why I structured property details into scannable sections</div>
+        <div class="dc-scan-body">
+          <div class="dc-row"><span class="dc-tag tag-found">Found</span><span class="dc-text">The property details page had to carry imagery, amenities, availability, pricing, and investment-linked payment details — high information density for a non-tech audience</span></div>
+          <div class="dc-row"><span class="dc-tag tag-rejected">Rejected</span><span class="dc-text">Long scrolling content blocks — would bury critical information and reduce trust in a high-stakes context</span></div>
+          <div class="dc-row"><span class="dc-tag tag-chose">Chose</span><span class="dc-text">Clear section headings and visual hierarchy — overview at a glance, deeper detail on demand</span></div>
+        </div>
+        <div class="dc-story-body"><p>The property details page had to carry a lot — imagery, amenities, availability, pricing, and investment-linked payment details. For a non-tech audience making high-value decisions, dense information kills trust. Clear section headings and strong visual hierarchy let users get an overview at a glance and go deeper only where needed. <strong>The luxury feel came from restraint — what wasn't on screen mattered as much as what was.</strong></p></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ S05 — SCREENS & DESIGN ============ -->
+  <div class="cs-section">
+    <div class="cs-section-num">05 — Screens & design</div>
+    <div class="cs-section-title">The core flows</div>
+    <div class="cs-section-subtitle">Three primary flows — property browsing, property details, and payment — each designed to feel premium and effortless.</div>
+
+    <!-- Property detail page — the hero screen -->
+    <!-- Mobile screen: full-bleed property image at top, property name + location, amenity icons row, pricing section, payment breakdown, CTA button -->
+    <div class="scan-sublabel">Property details page — the most important screen</div>
+    <div class="img-placeholder aspect-wide" style="margin-top:10px">
+      <div class="img-placeholder-inner">
+        <span class="img-ph-icon">🏠</span>
+        <div class="img-ph-label">Property Details Page</div>
+        <div class="img-ph-desc">Venya_PropertyDetail.jpg · The core screen — imagery, amenities, pricing, payment options</div>
+        <div class="img-ph-dims">1600 × 900 · Full property detail screen + context/annotations</div>
+      </div>
+    </div>
+    <div class="img-caption img-caption-scan">Property details — imagery → amenities → pricing → payment options. Designed first, everything else built around it.</div>
+    <div class="img-caption img-caption-story">The property details page was the anchor of the entire design. Imagery comes first to establish premium feel. Amenities, pricing, and payment follow in a decision sequence — each section visible at a glance, with detail available on demand.</div>
+
+    <div style="height:16px"></div>
+
+    <!-- Payment flow screens -->
+    <!-- 2-3 mobile screens showing the step-by-step payment flow: rental balance displayed, price difference calculation, payment method selection -->
+    <div class="scan-sublabel">Payment flow — step by step</div>
+    <div class="img-grid-3" style="margin-top:10px">
+      <div class="img-placeholder" style="aspect-ratio:9/16">
+        <div class="img-placeholder-inner">
+          <span class="img-ph-icon">💰</span>
+          <div class="img-ph-label">Rental Balance</div>
+          <div class="img-ph-desc">Venya_Payment_1.jpg</div>
+          <div class="img-ph-dims">Step 1 — Rental income balance shown</div>
+        </div>
+      </div>
+      <div class="img-placeholder" style="aspect-ratio:9/16">
+        <div class="img-placeholder-inner">
+          <span class="img-ph-icon">🔢</span>
+          <div class="img-ph-label">Price Breakdown</div>
+          <div class="img-ph-desc">Venya_Payment_2.jpg</div>
+          <div class="img-ph-dims">Step 2 — Deduction + difference shown</div>
+        </div>
+      </div>
+      <div class="img-placeholder" style="aspect-ratio:9/16">
+        <div class="img-placeholder-inner">
+          <span class="img-ph-icon">💳</span>
+          <div class="img-ph-label">Payment Method</div>
+          <div class="img-ph-desc">Venya_Payment_3.jpg</div>
+          <div class="img-ph-dims">Step 3 — Cash / cheque / bank transfer options</div>
+        </div>
+      </div>
+    </div>
+    <div class="img-caption img-caption-scan">Payment flow — 3 steps: rental balance → price breakdown → payment method. Only the relevant option shown at each step.</div>
+    <div class="img-caption img-caption-story">The step-by-step structure removed the cognitive load that existed on investor calls. Each step asks one question and answers it before moving to the next. The investor never sees the full complexity at once.</div>
+
+    <div style="height:16px"></div>
+
+    <!-- Full screens overview -->
+    <!-- Collage/grid of all app screens: listing, detail, booking confirmation, profile -->
+    <div class="scan-sublabel">Full screen overview</div>
+    <div class="img-placeholder aspect-wide" style="margin-top:10px">
+      <div class="img-placeholder-inner">
+        <span class="img-ph-icon">📲</span>
+        <div class="img-ph-label">All App Screens</div>
+        <div class="img-ph-desc">Venya_AllScreens.jpg · Complete screen collage — all primary flows</div>
+        <div class="img-ph-dims">1600 × 900 · Multi-screen grid: listing, detail, payment, confirmation, profile</div>
+      </div>
+    </div>
+    <div class="img-caption img-caption-scan">All primary screens — property listing, detail, payment flow, booking confirmation, and profile.</div>
+    <div class="img-caption img-caption-story">Every screen maintains the same visual language — generous white space, strong imagery, minimal text. The premium feel isn't one decision. It's the accumulation of hundreds of small ones.</div>
+  </div>
+
+  <!-- ============ S06 — ITERATION ============ -->
+  <div class="cs-section">
+    <div class="cs-section-num">06 — Iteration & refinement</div>
+    <div class="cs-section-title">Three weeks, three rounds</div>
+    <div class="cs-section-subtitle">First draft in week one. 2–3 rounds of iteration through daily Zoom calls with the founders.</div>
+
+    <!-- Scan mode -->
+    <div class="testing-grid">
+      <div class="testing-col">
+        <div class="testing-col-label">How we iterated</div>
+        <ul class="scan-list">
+          <li>1-week first draft delivered to founders</li>
+          <li>2–3 rounds based on daily Zoom feedback</li>
+          <li>No formal usability testing — founders as proxies</li>
+        </ul>
+      </div>
+      <div class="testing-col">
+        <div class="testing-col-label">What changed</div>
+        <ul class="scan-list">
+          <li>Payment breakdown refined — rental deductions made clearer</li>
+          <li>Property details layout adjusted to reduce cognitive load</li>
+          <li>Visual polish to strengthen credibility and trust</li>
+        </ul>
+      </div>
+      <div class="testing-col">
+        <div class="testing-col-label">The limitation</div>
+        <ul class="scan-list">
+          <li>All feedback came through founders — no direct investor input</li>
+          <li>Founders interpret user needs through their own lens</li>
+          <li>Design validated by logic and reference, not observed behaviour</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Story mode -->
+    <div class="testing-story">
+      <div>
+        <div class="testing-story-label">How we iterated</div>
+        <div class="testing-story-text">The first draft was ready in a week. From there, 2–3 rounds of iteration through daily Zoom calls with the founders — reviewing screens, refining logic, adjusting layouts.</div>
+      </div>
+      <div>
+        <div class="testing-story-label">What changed most</div>
+        <div class="testing-story-text">The payment breakdown went through the most rounds. Getting the rental income deduction to read clearly — without making the experience feel like a financial transaction rather than a luxury booking — took careful iteration. <strong>The tension between clarity and luxury was real and took time to resolve.</strong></div>
+      </div>
+      <div>
+        <div class="testing-story-label">The honest limitation</div>
+        <div class="testing-story-text">All feedback came through the founders. There was no direct investor input during the design process. Founders know their product deeply — but they interpret user needs through their own lens. Decisions were validated through logic and reference, not observed behaviour. <strong>That's a constraint worth naming, not hiding.</strong></div>
+      </div>
+    </div>
+
+    <div class="highlight-block">Designing without user access isn't ideal — but naming that constraint honestly and working around it deliberately is better than pretending it didn't exist.</div>
+  </div>
+
+  <!-- ============ S07 — OUTCOMES ============ -->
+  <div class="cs-section">
+    <div class="cs-section-num">07 — Outcomes</div>
+    <div class="cs-section-title">What it delivered</div>
+    <div class="cs-section-subtitle">No post-launch metrics — I wasn't embedded with the client after handoff. But the outcome was clear.</div>
+
+    <div class="metric-strip">
+      <div class="metric-item">
+        <div class="metric-val">3 wks</div>
+        <div class="metric-lbl">Brief to handoff</div>
+        <div class="metric-context">First draft in 7 days. 2–3 iteration rounds. Handoff on time with zero scope creep.</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-val">✓</div>
+        <div class="metric-lbl">Client approved</div>
+        <div class="metric-context">Approved across all iteration rounds. Payment breakdown specifically called out as solving the confusion investors had on calls.</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-val">✓</div>
+        <div class="metric-lbl">App built & deployed</div>
+        <div class="metric-context">App was built and deployed. The phone-based booking process was replaced with a self-serve digital experience.</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-val">0</div>
+        <div class="metric-lbl">Scope creep</div>
+        <div class="metric-context">Tight timeline discipline. Three weeks in, three weeks out. No missed deadlines.</div>
+      </div>
+    </div>
+
+    <div class="highlight-block">Good UI isn't just about how things look — it's about how much thinking you can remove from the user's path without them noticing.</div>
+  </div>
+
+  <!-- ============ S08 — REFLECTION ============ -->
+  <div class="cs-section">
+    <div class="cs-section-num">08 — Reflection & foresight</div>
+    <div class="cs-section-title">Honest reflection</div>
+
+    <!-- Scan -->
+    <div class="foresight-grid">
+      <div class="foresight-card">
+        <div class="foresight-label">What I'd do differently</div>
+        <div class="foresight-text">Push for even 2 investor interviews before the first draft. The payment structure was complex enough that founder interpretation had real limits — a single confused investor would have surfaced issues that never came up on calls.</div>
+      </div>
+      <div class="foresight-card">
+        <div class="foresight-label">What I'd add with more time</div>
+        <div class="foresight-text">Build a lightweight design system before touching screens. Working without one slowed iteration rounds and introduced minor inconsistencies that had to be cleaned up manually. The 3-week timeline made this feel impossible — but even a half-day on a token system would have paid back.</div>
+      </div>
+    </div>
+
+    <!-- Story -->
+    <div class="foresight-story">
+      <p>The biggest risk on this project was never fully resolved: I designed for users I never spoke to. The founders were excellent proxies — they knew the product inside out — but they couldn't fully replicate how an investor would experience the payment flow for the first time.</p><br>
+      <p><strong>If I did this again:</strong> I'd push for even two investor interviews before the first draft. The payment structure was complex enough that founder interpretation had real limits — a single confused investor would have surfaced issues that never came up on calls.</p><br>
+      <p>I'd also build a lightweight design system before touching screens. Working without one slowed iteration rounds and introduced minor inconsistencies. The 3-week timeline made this feel impossible — but even a half-day on a token system would have paid back in the later rounds.</p>
+    </div>
+
+    <div style="height:32px"></div>
+
+    <!-- Key takeaways -->
+    <div class="scan-sublabel">Key takeaways</div>
+    <div class="takeaway-grid" style="margin-top:10px">
+      <div class="takeaway-card">
+        <div class="takeaway-num">01</div>
+        <div class="takeaway-title">Design systems accelerate quality</div>
+        <div class="takeaway-desc">Using Polaris alongside Airbnb and MakeMyTrip patterns meant moving fast without sacrificing polish — even without a custom system.</div>
+      </div>
+      <div class="takeaway-card">
+        <div class="takeaway-num">02</div>
+        <div class="takeaway-title">Simplifying complexity is a design skill</div>
+        <div class="takeaway-desc">Breaking investment-linked payments into digestible UI required deep collaboration with the founders. Understanding the logic came first. UI came second.</div>
+      </div>
+      <div class="takeaway-card">
+        <div class="takeaway-num">03</div>
+        <div class="takeaway-title">Premium doesn't mean complicated</div>
+        <div class="takeaway-desc">The luxury market expects polish — but users still need simplicity. The core challenge was holding both at the same time without compromising either.</div>
+      </div>
+    </div>
+
+    <div class="highlight-block">This project taught me that good UI isn't just about how things look — it's about how much thinking you can remove from the user's path without them noticing.</div>
+  </div>
+
+  <!-- Next project -->
+  <a class="next-project" href="#">
+    <div>
+      <div class="next-label">Next project</div>
+      <div class="next-title">SHARP — Hyperlocal campaign metrics redesign</div>
+    </div>
+    <div class="next-arrow">→</div>
+  </a>
+
+</div>
+
+<script>
+function setMode(mode) {
+  const body = document.body;
+  const btnScan = document.getElementById('btn-scan');
+  const btnStory = document.getElementById('btn-story');
+  if (mode === 'story') {
+    body.classList.add('story-mode');
+    btnStory.classList.add('active');
+    btnScan.classList.remove('active');
+  } else {
+    body.classList.remove('story-mode');
+    btnScan.classList.add('active');
+    btnStory.classList.remove('active');
+  }
+}
+</script>
+</body>
+</html>

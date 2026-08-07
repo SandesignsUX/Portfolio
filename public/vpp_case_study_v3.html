@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link
+    href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@100,200,300,400,500,700,800,900&f[]=satoshi@300,400,500,700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #141210;
+      --bg-2: #1C1914;
+      --bg-3: #221F1B;
+      --bg-card: #1A1714;
+      --cream: #F0E8D8;
+      --cream-60: rgba(240, 232, 216, 0.6);
+      --cream-35: rgba(240, 232, 216, 0.35);
+      --cream-15: rgba(240, 232, 216, 0.15);
+      --cream-08: rgba(240, 232, 216, 0.08);
+      --cream-04: rgba(240, 232, 216, 0.04);
+      --amber: #B48246;
+      --amber-light: #C49A5A;
+      --amber-muted: rgba(180, 130, 70, 0.15);
+      --amber-border: rgba(180, 130, 70, 0.25);
+      --border: rgba(240, 232, 216, 0.08);
+      --border-mid: rgba(240, 232, 216, 0.12);
+      --green-muted: rgba(74, 155, 111, 0.15);
+      --green-border: rgba(74, 155, 111, 0.25);
+      --font-display: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif;
+      --font-body: 'Satoshi', 'Inter', sans-serif;
+      --transition: 280ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- GLOBAL NAV ---- */
+    .global-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: rgba(20, 18, 16, 0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--amber);
+      font-weight: 300;
+    }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--cream-35);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    /* ---- CS BAR — 3-column, centre aligned ---- */
+    .cs-bar {
+      position: fixed;
+      top: 56px;
+      left: 0;
+      right: 0;
+      z-index: 190;
+      background: rgba(20, 18, 16, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      height: 64px;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+    }
+
+    .cs-bar-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .cs-bar-num {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream-35);
+    }
+
+    .cs-bar-centre {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cs-toggle {
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .toggle-btn {
+      padding: 5px 16px;
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--cream-35);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+    }
+
+    .toggle-btn.active {
+      background: var(--bg-2);
+      color: var(--cream);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .cs-bar-right {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* ---- PAGE CONTENT ---- */
+    .page-content {
+      padding-top: 120px;
+      max-width: 860px;
+      margin: 0 auto;
+      padding-left: 40px;
+      padding-right: 40px;
+      padding-bottom: 120px;
+    }
+
+    /* ---- SECTIONS ---- */
+    .cs-section {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cs-section:last-of-type {
+      border-bottom: none;
+    }
+
+    .cs-section-num {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 8px;
+    }
+
+    .cs-section-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .cs-section-subtitle {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--cream-60);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      max-width: 600px;
+    }
+
+    /* ---- HERO ---- */
+    .cs-hero {
+      padding: 48px 0 0;
+    }
+
+    .cs-hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      background: var(--amber-muted);
+      border: 1px solid var(--amber-border);
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--amber-light);
+      margin-bottom: 24px;
+    }
+
+    .cs-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      color: var(--cream);
+      margin-bottom: 24px;
+    }
+
+    .cs-hero-title span {
+      font-weight: 200;
+      color: var(--cream-60);
+    }
+
+    .cs-hero-meta {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .cs-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .cs-meta-label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream-35);
+    }
+
+    .cs-meta-value {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--cream-60);
+    }
+
+    .cs-hero-constraint-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .cs-constraint {
+      padding: 5px 12px;
+      background: var(--cream-04);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--cream-35);
+    }
+
+    /* ---- IMAGES ---- */
+
+
+
+    .img-cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .img-contain {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ---- IMAGE PLACEHOLDERS ---- */
+
+
+
+    /* Hero image — full width, 16:9 landscape */
+    .img-placeholder {
+      width: 100%;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .img-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(240, 232, 216, 0.03) 39px, rgba(240, 232, 216, 0.03) 40px),
+        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(240, 232, 216, 0.03) 39px, rgba(240, 232, 216, 0.03) 40px);
+    }
+
+    .img-placeholder-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .img-ph-icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+      display: block;
+      opacity: 0.4;
+    }
+
+    .img-ph-label {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--cream-35);
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+
+    .img-ph-desc {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--cream-15);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .img-ph-dims {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--cream-15);
+      margin-top: 10px;
+      letter-spacing: 0.06em;
+      padding: 3px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    /* Aspect ratios */
+    .aspect-hero {
+      aspect-ratio: 16/9;
+    }
+
+    /* Hero_Image_Framer.jpg — wide landscape banner */
+    .aspect-flow {
+      aspect-ratio: 16/9;
+    }
+
+    /* User_Flow.png — wide landscape diagram */
+    .aspect-screens {
+      aspect-ratio: 16/9;
+    }
+
+    /* Wireframes_Desktop_new.jpg — desktop screens collage */
+    .aspect-mobile {
+      aspect-ratio: 16/9;
+    }
+
+    /* Wireframes_Mobile_New.jpg — mobile screens collage */
+    .aspect-mockups {
+      aspect-ratio: 16/9;
+    }
+
+    /* Mockups_After_Test.jpg — post-testing mockups */
+    .aspect-process {
+      aspect-ratio: 16/9;
+    }
+
+    /* Design_Process_Vertical_3_1.jpg — process stages banner */
+
+    /* Two-column image layout */
+    .img-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .img-grid-2-left {
+      grid-template-columns: 3fr 2fr;
+    }
+
+    /* Image caption */
+    .img-caption {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--cream-35);
+      margin-top: 10px;
+      line-height: 1.5;
+      padding-left: 4px;
+    }
+
+    /* ---- SCAN ELEMENTS ---- */
+    .scan-sublabel {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream-35);
+      margin-bottom: 8px;
+      margin-top: 20px;
+    }
+
+    .scan-sublabel:first-of-type {
+      margin-top: 0;
+    }
+
+    ul.scan-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    ul.scan-list li {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--cream-60);
+      line-height: 1.6;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    ul.scan-list li::before {
+      content: "–";
+      position: absolute;
+      left: 0;
+      color: var(--cream-35);
+    }
+
+    .scan-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 16px 0;
+    }
+
+    .problem-statement {
+      padding: 16px 20px;
+      background: var(--bg-2);
+      border: 1px solid var(--border-mid);
+      border-radius: 16px;
+      margin-bottom: 20px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.6;
+    }
+
+    .problem-statement strong {
+      color: var(--amber);
+      font-weight: 500;
+    }
+
+    /* ---- DECISION CARDS ---- */
+    .decision-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .dc {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--bg-card);
+    }
+
+    .dc-head {
+      padding: 14px 20px;
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+
+    .dc-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 11px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dc-row:last-child {
+      border-bottom: none;
+    }
+
+    .dc-tag {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      padding: 2px 9px;
+      border-radius: 999px;
+      flex-shrink: 0;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    .tag-found {
+      background: var(--green-muted);
+      color: #7DC98A;
+      border: 1px solid var(--green-border);
+    }
+
+    .tag-chose {
+      background: var(--amber-muted);
+      color: var(--amber-light);
+      border: 1px solid var(--amber-border);
+    }
+
+    .tag-rejected {
+      background: var(--cream-04);
+      color: var(--cream-35);
+      border: 1px solid var(--border);
+    }
+
+    .dc-text {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--cream-60);
+      line-height: 1.6;
+    }
+
+    .dc-scan-body {}
+
+    .dc-story-body {
+      padding: 16px 20px;
+      display: none;
+    }
+
+    .dc-story-body p {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--cream-60);
+      line-height: 1.8;
+    }
+
+    .dc-story-body p strong {
+      color: var(--cream);
+      font-weight: 500;
+    }
+
+    /* ---- INSIGHT CARDS ---- */
+    .insight-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .insight-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      background: var(--bg-card);
+    }
+
+    .insight-cat {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 8px;
+    }
+
+    .insight-finding {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+
+    .insight-source {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--cream-35);
+      font-weight: 400;
+      padding: 3px 10px;
+      background: var(--cream-04);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    .insight-expansion {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--cream-60);
+      line-height: 1.7;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      display: none;
+    }
+
+    /* ---- METRIC STRIP ---- */
+    .metric-strip {
+      display: flex;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .metric-item {
+      flex: 1;
+      padding: 16px 20px;
+      background: var(--bg-card);
+    }
+
+    .metric-val {
+      font-family: var(--font-body);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--amber);
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .metric-lbl {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 400;
+      color: var(--cream-35);
+      margin-top: 4px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .metric-context {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--cream-60);
+      line-height: 1.6;
+      margin-top: 6px;
+      display: none;
+    }
+
+    /* ---- HIGHLIGHT BLOCK ---- */
+    .highlight-block {
+      border-left: 2px solid var(--amber);
+      padding: 14px 20px;
+      background: var(--amber-muted);
+      border-radius: 0 12px 12px 0;
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--cream-60);
+      line-height: 1.7;
+      margin-top: 24px;
+      display: none;
+    }
+
+    /* ---- TESTING ---- */
+    .testing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .testing-col {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      background: var(--bg-card);
+    }
+
+    .testing-col-label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream-35);
+      margin-bottom: 12px;
+    }
+
+    .testing-story {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .testing-story-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 6px;
+    }
+
+    .testing-story-text {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--cream-60);
+      line-height: 1.8;
+    }
+
+    .testing-story-text strong {
+      color: var(--cream);
+      font-weight: 500;
+    }
+
+    /* ---- FORESIGHT ---- */
+    .foresight-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .foresight-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      background: var(--bg-card);
+    }
+
+    .foresight-label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream-35);
+      margin-bottom: 8px;
+    }
+
+    .foresight-text {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--cream-60);
+      line-height: 1.7;
+    }
+
+    .foresight-story {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--cream-60);
+      line-height: 1.8;
+      display: none;
+    }
+
+    .foresight-story strong {
+      color: var(--cream);
+      font-weight: 500;
+    }
+
+    /* ---- NEXT PROJECT ---- */
+    .next-project {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      background: var(--bg-2);
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s;
+      text-decoration: none;
+      margin-top: 64px;
+    }
+
+    .next-project:hover {
+      border-color: var(--border-mid);
+      transform: translateY(-2px);
+    }
+
+    .next-label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream-35);
+      margin-bottom: 6px;
+    }
+
+    .next-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--cream);
+    }
+
+    .next-arrow {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--cream-60);
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .next-project:hover .next-arrow {
+      background: var(--amber-muted);
+      border-color: var(--amber-border);
+      color: var(--amber-light);
+    }
+
+    /* ---- STORY MODE TOGGLES ---- */
+    body.story-mode .dc-scan-body {
+      display: none;
+    }
+
+    body.story-mode .dc-story-body {
+      display: block;
+    }
+
+    body.story-mode .insight-expansion {
+      display: block;
+    }
+
+    body.story-mode .metric-context {
+      display: block;
+    }
+
+    body.story-mode .highlight-block {
+      display: block;
+    }
+
+    body.story-mode .testing-grid {
+      display: none;
+    }
+
+    body.story-mode .testing-story {
+      display: flex;
+    }
+
+    body.story-mode .foresight-grid {
+      display: none;
+    }
+
+    body.story-mode .foresight-story {
+      display: block;
+    }
+
+    /* Story mode shows story captions on images */
+    .img-caption-story {
+      display: none;
+      font-style: italic;
+      color: var(--amber-light);
+    }
+
+    body.story-mode .img-caption-story {
+      display: block;
+    }
+
+    body.story-mode .img-caption-scan {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Global nav -->
+  <nav class="global-nav">
+    <a class="nav-logo" href="#">Sandeep <span>Pawar</span></a>
+    <a class="nav-back" href="#">← Back to work</a>
+  </nav>
+
+  <!-- CS bar -->
+  <div class="cs-bar">
+    <div class="cs-bar-left">
+      <span class="cs-bar-num">01 / 03</span>
+    </div>
+    <div class="cs-bar-centre">
+      <div class="cs-toggle">
+        <button class="toggle-btn active" id="btn-scan" onclick="setMode('scan')">Recruiter Scan Mode</button>
+        <button class="toggle-btn" id="btn-story" onclick="setMode('story')">Full Story</button>
+      </div>
+    </div>
+    <div class="cs-bar-right"></div>
+  </div>
+
+  <div class="page-content">
+
+    <!-- ============ HERO ============ -->
+    <div class="cs-hero">
+      <div class="cs-hero-tag">Lead project · Operations · FinTech</div>
+      <div class="cs-hero-title">Streamlining <span>fuel station</span><br>operations</div>
+      <div class="cs-hero-meta">
+        <div class="cs-meta-item"><span class="cs-meta-label">Role</span><span class="cs-meta-value">Sole UX
+            Designer</span></div>
+        <div class="cs-meta-item"><span class="cs-meta-label">Team</span><span class="cs-meta-value">Me · Developer ·
+            CTO</span></div>
+        <div class="cs-meta-item"><span class="cs-meta-label">Platform</span><span class="cs-meta-value">Android +
+            Web</span></div>
+        <div class="cs-meta-item"><span class="cs-meta-label">Timeline</span><span class="cs-meta-value">3 months ·
+            2024</span></div>
+      </div>
+      <div class="cs-hero-constraint-row">
+        <span class="cs-constraint">Less than 3 weeks to dev handoff</span>
+        <span class="cs-constraint">Non-tech-savvy users</span>
+        <span class="cs-constraint">No design system</span>
+        <span class="cs-constraint">Real financial data at stake</span>
+      </div>
+
+      <!-- Hero Image — Hero_Image_Framer.jpg -->
+      <!-- Wide landscape banner showing product screens on the right, title text on left, dark navy bg -->
+      <div class="img-placeholder aspect-hero">
+        <img class="img-cover" src="assets/VPP/Hero Image_vc.jpg">
+      </div>
+      <div class="img-caption img-caption-scan">Fuel Station Management — A Digital Transformation</div>
+      <div class="img-caption img-caption-story">The product covers four distinct user roles — cashier, accountant,
+        owner, and admin — each with their own flows and data responsibilities.</div>
+    </div>
+
+    <!-- ============ S01 — THE PROBLEM ============ -->
+    <div class="cs-section">
+      <div class="cs-section-num">01 — The problem</div>
+      <div class="cs-section-title">The problem nobody had named</div>
+      <div class="cs-section-subtitle">The brief said "digitise operations." The site visit said something different.
+      </div>
+
+      <div class="problem-statement">
+        Fuel station staff were running a business on <strong>paper logs, Excel, and Tally</strong> — three tools that
+        didn't talk to each other.
+      </div>
+      <div class="scan-sublabel">What this caused</div>
+      <ul class="scan-list">
+        <li>Cashiers manually entered the same data 3 times across disconnected tools</li>
+        <li>Owners had no live visibility without asking the accountant directly</li>
+        <li>Cashiers stayed an unpaid extra hour after every shift — nobody had flagged it</li>
+        <li>Tax season meant rushed, error-prone manual reconciliation</li>
+      </ul>
+      <div class="scan-divider"></div>
+      <div class="scan-sublabel">The real problem</div>
+      <ul class="scan-list">
+        <li>Not just "replace paper with software" — eliminate the hidden workflow inefficiencies nobody had named yet
+        </li>
+      </ul>
+      <div class="highlight-block">The real problem wasn't the tools — it was the workflow those tools had created.
+      </div>
+    </div>
+
+    <!-- ============ S02 — RESEARCH & INSIGHTS ============ -->
+    <div class="cs-section">
+      <div class="cs-section-num">02 — Research & insights</div>
+      <div class="cs-section-title">What a site visit changed</div>
+      <div class="cs-section-subtitle">On-site observation, contextual interviews, and user flow mapping with the owner
+        and CTO.</div>
+
+      <div class="insight-grid">
+        <div class="insight-card">
+          <div class="insight-cat">On-site discovery</div>
+          <div class="insight-finding">Cashiers stayed an unpaid hour after every shift — nobody had flagged it</div>
+          <span class="insight-source">Site visit</span>
+          <div class="insight-expansion">This wasn't in the brief. I observed it during the site visit — cashiers
+            queuing to hand paper logs to the accountant before they could leave. An extra hour, every shift, invisible
+            by habit.</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-cat">Flow mapping</div>
+          <div class="insight-finding">Credit invoicing was a 6-step manual process ending in a WhatsApp photo</div>
+          <span class="insight-source">Flow mapping session</span>
+          <div class="insight-expansion">Calculate → add GST → add interest → add GST on interest → print → photograph →
+            WhatsApp. Six steps, entirely manual. Not in scope. We added it.</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-cat">Owner interview</div>
+          <div class="insight-finding">No live financial visibility — every report required calling the accountant</div>
+          <span class="insight-source">Contextual interview</span>
+          <div class="insight-expansion">The owner couldn't see cash flow, fuel stock, or tax liability without a call.
+            This wasn't a preference — it was the only way the current system worked.</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-cat">Process audit</div>
+          <div class="insight-finding">Same data entered 3 times — paper logs, Excel, then Tally</div>
+          <span class="insight-source">On-site observation</span>
+          <div class="insight-expansion">Every sale: paper register → spreadsheet → Tally. Three entries, same data,
+            every day. Three separate chances for human error.</div>
+        </div>
+      </div>
+      <div class="highlight-block">Research didn't just inform the design — it expanded the brief. Two significant
+        problems we solved were never mentioned until we went on-site.</div>
+    </div>
+
+    <!-- ============ S03 — DESIGN PROCESS ============ -->
+    <div class="cs-section">
+      <div class="cs-section-num">03 — Design process</div>
+      <div class="cs-section-title">How we went from insight to interface</div>
+      <div class="cs-section-subtitle">Four stages — Discovery, User Flow & Wireframing, Usability Testing, Interface
+        Design.</div>
+
+      <!-- Design process banner — Design_Process_Vertical_3_1.jpg -->
+      <!-- Horizontal strip showing 4 numbered stages: 01 Discovery → 02 User Flow & Wireframing → 03 Usability Testing → 04 Interface Design, with a large dashboard mockup below -->
+      <div class="img-placeholder aspect-process">
+        <img class="img-contain" src="assets/VPP/design_process_vc.jpg" alt="Design Process Banner">
+        <!-- <div class="img-placeholder-inner">
+          <span class="img-ph-icon">🗺</span>
+          <div class="img-ph-label">Design Process Stages</div>
+          <div class="img-ph-desc">Design_Process_Vertical_3_1.jpg · 4-stage process banner with dashboard preview</div>
+          <div class="img-ph-dims">1600 × 600 · Wide banner with stage numbers + product screenshot below</div>
+        </div> -->
+      </div>
+      <div class="img-caption img-caption-scan">01 Discovery → 02 User Flow & Wireframing → 03 Usability Testing → 04
+        Interface Design</div>
+      <div class="img-caption img-caption-story">The process wasn't linear — discovery revealed scope gaps, which
+        reshaped the user flows, which changed the wireframes. Each stage fed back into the previous one.</div>
+
+      <div class="scan-divider"></div>
+
+      <!-- User Flow — User_Flow.png -->
+      <!-- Wide landscape diagram: Login → Select Summary Type → Input Data → Review Data → Submit → Dashboard Updated, then branches for Dashboard Login with Generate Invoices / Sales Reports / Tax Reports / Analytics -->
+      <div class="scan-sublabel" style="margin-top:24px">User flow</div>
+      <div class="img-placeholder aspect-flow">
+        <img class="img-contain" src="assets/VPP/user_flow_vc.jpg" alt="User Flow Diagram">
+        <!--<div class="img-placeholder-inner">
+          <span class="img-ph-icon">🔀</span>
+          <div class="img-ph-label">User Flow Diagram</div>
+          <div class="img-ph-desc">User_Flow.png · Mobile App / Sales Dashboard / Analytics</div>
+          <div class="img-ph-dims">1600 × 900 · Login → Input → Submit → Dashboard → Reports / Invoices / Analytics
+          </div>
+        </div> -->
+      </div>
+      <div class="img-caption img-caption-scan">Three user journeys mapped — cashier mobile flow, accountant dashboard
+        flow, and owner analytics flow.</div>
+      <div class="img-caption img-caption-story">The user flow session with the owner and CTO was where the credit
+        invoicing gap surfaced. Mapping the accountant's journey revealed a 6-step manual process nobody had considered
+        in scope.</div>
+    </div>
+
+    <!-- ============ S04 — WIREFRAMES ============ -->
+    <div class="cs-section">
+      <div class="cs-section-num">04 — Wireframes</div>
+      <div class="cs-section-title">Straight to hi-fi — by design</div>
+      <div class="cs-section-subtitle">With less than 3 weeks to dev handoff, lo-fi wireframes would have added a round
+        of abstract feedback we couldn't afford.</div>
+
+      <!-- Desktop wireframes — Wireframes_Desktop_new.jpg -->
+      <!-- Collage of multiple browser-framed desktop screens: cashier data entry, daily sale report dashboard with donut charts, tank summary grid, tax reports, bank transfer list, and the 404 page -->
+      <div class="img-placeholder aspect-mobile">
+        <img class="img-contain" src="assets/VPP/mobile_wireframes_vc2.jpg" alt="Mobile Wireframes">
+        <!--<div class="img-placeholder-inner">
+          <span class="img-ph-icon">🖥</span>
+          <div class="img-ph-label">Desktop Wireframes</div>
+          <div class="img-ph-desc">Wireframes_Desktop_new.jpg · Web dashboard screens collage</div>
+          <div class="img-ph-dims">1600 × 900 · Multi-screen collage: data entry, daily sale report, tank grid, tax
+            reports, bank transfers</div>
+        </div>-->
+      </div>
+      <div class="img-caption img-caption-scan">Android app — 8 cashier flows across Fuel Summary, Oil Summary, CNG,
+        Credit A/c, Cash Packets, Bank Transfers, Loss Reports, and Daily Rates.</div>
+      <div class="img-caption img-caption-story">The decision to go hi-fi immediately meant every feedback round was
+        grounded in real interface decisions — not abstract boxes. The client could react to actual layout, hierarchy,
+        and flow from day one.</div>
+
+      <div style="height:12px"></div>
+
+      <!-- Mobile wireframes — Wireframes_Mobile_New.jpg -->
+      <!-- Collage of mobile screens: login, home screen with 8 feature tiles (Fuel Summary, Oil Summary, CNG, Credit A/c, Cash Packets, Bank Transfers, Loss Reports, Daily Rates), cashier fuel summary form, date picker, purchase invoices, profile, oil summary, and a success modal "Loss Report Submitted" -->
+      <div class="img-placeholder aspect-screens">
+        <img class="img-contain" src="assets/VPP/pc_wireframes_vc.jpg" alt="Desktop Wireframes">
+        <!--<div class="img-placeholder-inner">
+          <span class="img-ph-icon">📱</span>
+          <div class="img-ph-label">Mobile Wireframes</div>
+          <div class="img-ph-desc">Wireframes_Mobile_New.jpg · Android app screens collage</div>
+          <div class="img-ph-dims">1600 × 1200 · Login, home dashboard (8 feature tiles), cashier flows, date picker,
+            success modal</div>
+        </div>-->
+      </div>
+      <div class="img-caption img-caption-scan">Web dashboard — cashier data entry, daily sale reports, tank summaries,
+        tax reports, and bank transfer management.</div>
+      <div class="img-caption img-caption-story">The 8-tile home screen was a deliberate information architecture
+        decision — cashiers needed to reach any flow in one tap. Depth was hidden behind each tile, not exposed on the
+        home screen.</div>
+    </div>
+
+    <!-- ============ S05 — KEY DECISIONS ============ -->
+    <div class="cs-section">
+      <div class="cs-section-num">05 — Key decisions</div>
+      <div class="cs-section-title">What I chose and why</div>
+
+      <div class="decision-cards">
+        <div class="dc">
+          <div class="dc-head">Why I skipped lo-fi and went straight to hi-fi</div>
+          <div class="dc-scan-body">
+            <div class="dc-row"><span class="dc-tag tag-found">Constraint</span><span class="dc-text">Less than 3 weeks
+                to dev handoff — lo-fi would have added a round of abstract feedback we couldn't afford</span></div>
+            <div class="dc-row"><span class="dc-tag tag-rejected">Rejected</span><span class="dc-text">Lo-fi wireframes
+                — too slow, feedback too abstract for non-designer stakeholders</span></div>
+            <div class="dc-row"><span class="dc-tag tag-chose">Chose</span><span class="dc-text">Hi-fi wireframes from
+                day one — gave the client something concrete to react to, kept the dev team unblocked</span></div>
+          </div>
+          <div class="dc-story-body">
+            <p>Less than 3 weeks to dev handoff. Lo-fi would have added a feedback round we couldn't afford. Hi-fi gave
+              everyone something concrete from day one. <strong>The constraint forced a better process.</strong></p>
+          </div>
+        </div>
+        <div class="dc">
+          <div class="dc-head">Why I chose real-time alerts over end-of-day reports</div>
+          <div class="dc-scan-body">
+            <div class="dc-row"><span class="dc-tag tag-found">Found</span><span class="dc-text">By the time an
+                end-of-day report flagged an error, it had already affected multiple downstream entries</span></div>
+            <div class="dc-row"><span class="dc-tag tag-rejected">Rejected</span><span class="dc-text">End-of-day
+                summary report — too late, errors had already compounded</span></div>
+            <div class="dc-row"><span class="dc-tag tag-chose">Chose</span><span class="dc-text">Field-level inline
+                alerts — catch mismatches at entry, before they propagate</span></div>
+          </div>
+          <div class="dc-story-body">
+            <p>The accountant made it clear during testing — by the time an end-of-day report flagged an error, it had
+              already affected downstream entries. <strong>Real-time caught it at the source.</strong></p>
+          </div>
+        </div>
+        <div class="dc">
+          <div class="dc-head">Why we built a dedicated credit invoicing flow</div>
+          <div class="dc-scan-body">
+            <div class="dc-row"><span class="dc-tag tag-found">Found</span><span class="dc-text">6-step manual invoice
+                process uncovered during flow mapping — not in original scope</span></div>
+            <div class="dc-row"><span class="dc-tag tag-chose">Chose</span><span class="dc-text">Dedicated automated
+                flow — replaced the entire WhatsApp-based process with a single action</span></div>
+          </div>
+          <div class="dc-story-body">
+            <p>Six manual steps. Not in the original brief. Clearly broken. I made the case to include it — one
+              automated flow replaced the entire WhatsApp-based process.</p>
+          </div>
+        </div>
+        <div class="dc">
+          <div class="dc-head">Why I stayed involved through development</div>
+          <div class="dc-scan-body">
+            <div class="dc-row"><span class="dc-tag tag-found">Found</span><span class="dc-text">GST calculations,
+                credit interest, tax report logic — too complex to hand off via Figma files alone</span></div>
+            <div class="dc-row"><span class="dc-tag tag-chose">Chose</span><span class="dc-text">Daily calls through
+                development — clarified APIs, reviewed builds, adjusted designs to match technical realities</span>
+            </div>
+          </div>
+          <div class="dc-story-body">
+            <p>Handing off and stepping away wasn't an option. The business logic was complex enough that developers
+              needed ongoing design input throughout the build. <strong>The handoff was a collaboration, not a
+                delivery.</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ S06 — TESTING ============ -->
+    <div class="cs-section">
+      <div class="cs-section-num">06 — Prototype & testing</div>
+      <div class="cs-section-title">Tested where it actually mattered</div>
+      <div class="cs-section-subtitle">At the fuel station, during actual shift-end, with real users on a staging build.
+      </div>
+
+      <!-- Scan mode — 3 columns -->
+      <div class="testing-grid">
+        <div class="testing-col">
+          <div class="testing-col-label">How</div>
+          <ul class="scan-list">
+            <li>Moderated testing at the fuel station</li>
+            <li>Real users, live data, staging platform</li>
+            <li>One-on-one with each cashier manager</li>
+          </ul>
+        </div>
+        <div class="testing-col">
+          <div class="testing-col-label">What we found</div>
+          <ul class="scan-list">
+            <li>Accountant flows completed independently</li>
+            <li>Fuel summary needed guidance</li>
+            <li>3/4 cashiers reached for paper mid-task</li>
+            <li>Blank forms broke mental models</li>
+          </ul>
+        </div>
+        <div class="testing-col">
+          <div class="testing-col-label">What changed</div>
+          <ul class="scan-list">
+            <li>Added prefilled forms from previous day</li>
+            <li>Cross-period dashboard comparisons</li>
+            <li>Reduced redundant navigation steps</li>
+            <li>Real-time field-level error alerts</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Story mode -->
+      <div class="testing-story">
+        <div>
+          <div class="testing-story-label">How we tested</div>
+          <div class="testing-story-text">We tested at the fuel station during actual shift-end — real users, live data,
+            staging platform. No meeting room, no simulated tasks.</div>
+        </div>
+        <div>
+          <div class="testing-story-label">The most telling moment</div>
+          <div class="testing-story-text">3 out of 4 cashiers reached for their paper sheet mid-task to check the
+            previous day's closing balance. <strong>The app had blank forms where it should have had data.</strong> We'd
+            designed for what the system needed — not what users needed.</div>
+        </div>
+        <div>
+          <div class="testing-story-label">What changed</div>
+          <div class="testing-story-text">Prefilled forms auto-populated from the previous day's closing data. Dashboard
+            improvements for cross-period comparisons. A tighter navigation structure based on where friction actually
+            appeared.</div>
+        </div>
+      </div>
+
+      <div style="height:24px"></div>
+
+      <!-- Mockups after testing — Mockups_After_Test.jpg -->
+      <!-- Detailed mockup collage: left = Cashier Fuel Summary mobile form with Next button, centre = desktop Fuel Summary - Cashier Data entry form + below it a tabbed Fuel/CNG/Oil/Credit tank grid showing Tank 1–5 with totals, right = Oil Summary mobile form -->
+      <div class="img-placeholder aspect-mockups">
+        <img class="img-contain" src="assets/VPP/post-testing_wireframes_vc.jpg" alt="Mockups After Test">
+        <!--<div class="img-placeholder-inner">
+          <span class="img-ph-icon">✅</span>
+          <div class="img-ph-label">Post-Testing Mockups</div>
+          <div class="img-ph-desc">Mockups_After_Test.jpg · Final screens after usability testing iterations</div>
+          <div class="img-ph-dims">1600 × 900 · Mobile cashier form (left) · Desktop data entry + tank grid (centre) ·
+            Oil summary mobile (right)</div>
+        </div>-->
+      </div>
+      <div class="img-caption img-caption-scan">Final screens after testing iterations — cashier fuel summary (mobile),
+        data entry + tank grid (web), oil summary (mobile).</div>
+      <div class="img-caption img-caption-story">The pre-filled form pattern is visible here — shift date, shift number,
+        and tank pre-selected based on the cashier's previous entry. One of the changes that came directly from watching
+        users reach for their paper sheet.</div>
+
+      <div class="highlight-block">We'd designed for what the system needed from users — not what users needed from the
+        system. Testing caught it.</div>
+    </div>
+
+    <!-- ============ S07 — OUTCOMES ============ -->
+    <div class="cs-section">
+      <div class="cs-section-num">07 — Outcomes</div>
+      <div class="cs-section-title">What it delivered</div>
+
+      <div class="metric-strip">
+        <div class="metric-item">
+          <div class="metric-val">55%</div>
+          <div class="metric-lbl">Faster shift closing</div>
+          <div class="metric-context">45 minutes → ~20. Cashiers finished their shift and left.</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-val">0</div>
+          <div class="metric-lbl">Unpaid overtime</div>
+          <div class="metric-context">The unpaid overtime nobody had questioned was eliminated entirely.</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-val">6→1</div>
+          <div class="metric-lbl">Invoice steps</div>
+          <div class="metric-context">A 6-step WhatsApp process became one action inside the platform.</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-val">100%</div>
+          <div class="metric-lbl">Paper-to-digital</div>
+          <div class="metric-context">Every shift transitioned — including users who had never used a digital ops tool
+            before.</div>
+        </div>
+      </div>
+
+      <div class="highlight-block">The project started as a digitisation task. It became a workflow redesign — because
+        we spent time understanding how people actually worked before we started designing.</div>
+    </div>
+
+    <!-- ============ S08 — REFLECTION ============ -->
+    <div class="cs-section">
+      <div class="cs-section-num">08 — Reflection & foresight</div>
+      <div class="cs-section-title">Honest reflection</div>
+
+      <div class="foresight-grid">
+        <div class="foresight-card">
+          <div class="foresight-label">What went wrong</div>
+          <div class="foresight-text">Initial cashier flows had friction — designed around system logic, not user mental
+            models. Post-launch GST and credit interest edge cases only surfaced in live transactions.</div>
+        </div>
+        <div class="foresight-card">
+          <div class="foresight-label">What I'd do differently</div>
+          <div class="foresight-text">Run a cognitive walkthrough with the accountant before usability testing. Involve
+            engineering earlier in complex calculation logic. Explore connecting fuel pumps directly to eliminate manual
+            entry at source.</div>
+        </div>
+      </div>
+      <div class="foresight-story">
+        <p>The cashier flows had more friction than expected — we'd designed for what the system needed, not what users
+          needed. Testing caught it and we iterated before launch.</p><br>
+        <p>Post-launch, a 2-week refinement phase surfaced edge cases only visible in real transactions. No full
+          redesigns — but it confirmed staged testing doesn't replace live use.</p><br>
+        <p><strong>If I did this again:</strong> cognitive walkthrough with the accountant before testing, engineering
+          involved earlier in the business logic, and fuel pump integration to eliminate manual cashier entry entirely.
+        </p>
+      </div>
+      <div class="highlight-block">You do not need to have done everything perfectly. You need to show you know what you
+        would do next.</div>
+    </div>
+
+    <!-- Next project -->
+    <a class="next-project" href="#">
+      <div>
+        <div class="next-label">Next project</div>
+        <div class="next-title">SHARP — Hyperlocal campaign metrics redesign</div>
+      </div>
+      <div class="next-arrow">→</div>
+    </a>
+
+  </div>
+
+  <script>
+    function setMode(mode) {
+      const body = document.body;
+      const btnScan = document.getElementById('btn-scan');
+      const btnStory = document.getElementById('btn-story');
+      if (mode === 'story') {
+        body.classList.add('story-mode');
+        btnStory.classList.add('active');
+        btnScan.classList.remove('active');
+      } else {
+        body.classList.remove('story-mode');
+        btnScan.classList.add('active');
+        btnStory.classList.remove('active');
+      }
+    }
+  </script>
+</body>
+
+</html>
