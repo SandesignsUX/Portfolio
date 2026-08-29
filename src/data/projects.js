@@ -36,7 +36,7 @@ export const projects = [
   {
     id: "venya",
     featured: false,
-    href: "/venya_case_study.html",
+    href: "/work/venya",
     placeholder: "Venya",
     placeholderSize: "52px",
     imageTag: "UI craft",
@@ -54,6 +54,8 @@ export const skills = [
   "Product Thinking",
   "Visual / UI Design",
   "Prototyping & Testing",
+  "UI Design",
+  "User Research"
 ];
 
 export const aboutFacts = [

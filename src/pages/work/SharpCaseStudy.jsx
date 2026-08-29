@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/caseStudy.css';
+import { CaseStudyImage } from '../../components/case-study/CaseStudyImage';
 
 const SharpCaseStudy = () => {
   const [mode, setMode] = useState('scan');
@@ -44,7 +45,7 @@ const SharpCaseStudy = () => {
         aria-label="Case study reading mode"
       >
         <div className="cs-bar-left">
-          <span className="cs-bar-num">03 / 03</span>
+          <span className="cs-bar-label">SHARP</span>
         </div>
 
         <div className="cs-bar-centre">
@@ -125,13 +126,7 @@ const SharpCaseStudy = () => {
             <span className="cs-constraint">Enterprise SaaS complexity</span>
             <span className="cs-constraint">Project shut down before testing</span>
           </div>
-          <div className="img-placeholder aspect-hero">
-            <div className="img-ph-inner">
-              <span className="img-ph-icon">📊</span>
-
-              <div className="img-ph-desc">SHARP platform — campaign dashboard + map view</div>
-            </div>
-          </div>
+          <CaseStudyImage aspectClass="aspect-hero" placeholderIcon="📊" placeholderText="SHARP platform — campaign dashboard + map view" />
           <div className="img-caption">SHARP (OOHAxis) — Laqshya Media Group's proprietary tool for planning and measuring OOH campaigns across 50,000+ sites in 26 cities.</div>
         </div>
 
@@ -229,7 +224,7 @@ const SharpCaseStudy = () => {
                 </div>
                 <div className="severity-card">
                   <div className="severity-num sev-1">3</div>
-                  <div className="severity-lbl" style={{ color: 'var(--cream-35)' }}>Severity 0–1</div>
+                  <div className="severity-lbl" style={{ color: 'var(--cream-60)' }}>Severity 0–1</div>
                   <div className="severity-desc">Cosmetic or non-issues</div>
                 </div>
               </div>
@@ -435,13 +430,7 @@ const SharpCaseStudy = () => {
                 </div>
               </div>
 
-              <div className="img-placeholder aspect-wide">
-                <div className="img-ph-inner">
-                  <span className="img-ph-icon">🔍</span>
-
-                  <div className="img-ph-desc">Full evaluation — 10 heuristics, all violations + severity ratings</div>
-                </div>
-              </div>
+              <CaseStudyImage aspectClass="aspect-wide" placeholderIcon="🔍" placeholderText="Full evaluation — 10 heuristics, all violations + severity ratings" />
               <div className="img-caption">Full heuristic evaluation — 10 Nielsen heuristics, 24 violations mapped and rated 0–4.</div>
 
               <div style={{ height: '24px' }} />
@@ -502,12 +491,7 @@ const SharpCaseStudy = () => {
               <div className="cs-section-eyebrow">04 — Content audit</div>
               <div className="cs-section-title">Mapping the full information architecture</div>
               <div className="cs-section-subtitle">Every page, every screen, every navigation path — documented. 18 unique pages, 50+ screens, many with confusingly similar names.</div>
-              <div className="img-placeholder aspect-screen">
-                <div className="img-ph-inner">
-                  <span className="img-ph-icon">🗂</span>
-                  <div className="img-ph-desc">Full IA map — 18 pages, 50+ screens, all navigation paths</div>
-                </div>
-              </div>
+              <CaseStudyImage aspectClass="aspect-screen" placeholderIcon="🗂" placeholderText="Full IA map — 18 pages, 50+ screens, all navigation paths" />
               <div className="img-caption">Full content inventory — every page and screen mapped across all four navigation sections.</div>
               <div className="scan-divider" />
               <div className="sub-label">Key IA problems found</div>
@@ -559,20 +543,10 @@ const SharpCaseStudy = () => {
               <div className="cs-section-title">The redesign, ready for testing</div>
               <div className="cs-section-subtitle">Full lo-fi prototype built across all major flows — ready for a moderated usability study with 3–5 participants. The project closed before testing began.</div>
 
-              <div className="img-placeholder aspect-screen">
-                <div className="img-ph-inner">
-                  <span className="img-ph-icon">📐</span>
-                  <div className="img-ph-desc">All major redesigned flows — dashboard, campaign flow, analytics, navigation</div>
-                </div>
-              </div>
+              <CaseStudyImage aspectClass="aspect-screen" placeholderIcon="📐" placeholderText="All major redesigned flows — dashboard, campaign flow, analytics, navigation" />
               <div className="img-caption">Lo-fi redesign — restructured navigation, renamed functions, bar graphs replacing donuts, back navigation throughout.</div>
               <div className="img-gap" />
-              <div className="img-placeholder aspect-wide">
-                <div className="img-ph-inner">
-                  <span className="img-ph-icon">↔️</span>
-                  <div className="img-ph-desc">Original SHARP (left) vs lo-fi redesign (right)</div>
-                </div>
-              </div>
+              <CaseStudyImage aspectClass="aspect-wide" placeholderIcon="↔️" placeholderText="Original SHARP (left) vs lo-fi redesign (right)" />
               <div className="img-caption">Before: original SHARP interface. After: lo-fi redesign with restructured IA, bar graphs, and step indicators.</div>
               <div className="scan-divider" />
               <div className="sub-label">What the usability test would have measured</div>

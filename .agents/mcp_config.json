@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "rams": {
+      "url": "https://worker.rams.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer rams_d3c10df9350669a10232cab0b0ea016b78b514826763ba83"
+      }
+    }
+  }
+}

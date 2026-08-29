@@ -2,19 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { vppImages } from "../../data/vppImages";
 import "../../styles/caseStudy.css";
-
-function CaseStudyImage({ src, alt, aspectClass, fit = "contain" }) {
-  return (
-    <div className={`cs-image-frame ${aspectClass}`}>
-      <img
-        src={src}
-        alt={alt}
-        className={fit === "cover" ? "img-cover" : "img-contain"}
-        loading="lazy"
-      />
-    </div>
-  );
-}
+import { CaseStudyImage } from "../../components/case-study/CaseStudyImage";
 
 export default function VPPCaseStudy() {
   const [mode, setMode] = useState("scan");
@@ -58,7 +46,7 @@ export default function VPPCaseStudy() {
         aria-label="Case study reading mode"
       >
         <div className="cs-bar-left">
-          <span className="cs-bar-num">01 / 03</span>
+          <span className="cs-bar-label">VPP</span>
         </div>
 
         <div className="cs-bar-centre">
@@ -864,7 +852,11 @@ export default function VPPCaseStudy() {
           </>
         )}
 
-        <Link className="next-project" to="/">
+        <Link
+          className="next-project"
+          to="/"
+          aria-label="Next project: SHARP — Hyperlocal campaign metrics redesign"
+        >
           <div>
             <div className="next-label">Next project</div>
             <div className="next-title">
@@ -872,7 +864,7 @@ export default function VPPCaseStudy() {
             </div>
             <div className="next-cta-hint">Read case study →</div>
           </div>
-          <div className="next-arrow">→</div>
+          <div className="next-arrow" aria-hidden="true">→</div>
         </Link>
       </main>
     </>

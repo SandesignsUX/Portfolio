@@ -1,94 +1,143 @@
-import { motion } from 'framer-motion';
-import { fadeUp, staggerContainer } from '../animations/variants';
+import { useState, useEffect } from 'react';
+import { motion, useReducedMotion, useMotionValue, useSpring } from 'framer-motion';
+import { createFadeUp, createStaggerContainer } from '../animations/variants';
+import { TextMorph } from 'torph/react';
 import { skills } from '../data/projects';
+import TextLoop from './TextLoop';
 
 export default function Hero() {
+  const reduceMotion = useReducedMotion();
+  const fadeUpVariant = createFadeUp(reduceMotion);
+  const staggerVariant = createStaggerContainer();
+  
+  const ROLES = ["UX Designer", "Design Generalist", "AI Designer", "Design Engineer"];
+  const [roleIndex, setRoleIndex] = useState(0);
+
+  useEffect(() => {
+    const roleInterval = setInterval(() => {
+      setRoleIndex(prev => (prev + 1) % ROLES.length);
+    }, 3000);
+
+    return () => {
+      clearInterval(roleInterval);
+    };
+  }, []);
+
   const scrollToWork = () => {
     document.getElementById('selected-work')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 25, stiffness: 150 };
+  const spotlightX = useSpring(mouseX, springConfig);
+  const spotlightY = useSpring(mouseY, springConfig);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left);
+    mouseY.set(e.clientY - rect.top);
+  };
+
   return (
-    <section className="hero" aria-labelledby="hero-heading">
-      <div className="orb orb-1" aria-hidden="true" />
-      <div className="orb orb-2" aria-hidden="true" />
-      <div className="orb orb-3" aria-hidden="true" />
+    <section className="hero" aria-labelledby="hero-heading" onMouseMove={handleMouseMove}>
+      <motion.div 
+        className="hero-spotlight" 
+        style={{
+          left: spotlightX,
+          top: spotlightY,
+          transform: "translate(-50%, -50%)"
+        }} 
+        aria-hidden="true" 
+      />
 
       <motion.div
         className="hero-inner"
-        variants={staggerContainer}
+        variants={staggerVariant}
         initial="hidden"
         animate="visible"
+        layout
       >
-        <motion.div className="hero-name" id="hero-heading" variants={fadeUp} custom={0}>
-          Sandeep
+        <motion.div layout className="hero-name" id="hero-heading" variants={fadeUpVariant} custom={0}>
+          👋 I'm Sandeep
         </motion.div>
-        <motion.div className="hero-name-light" variants={fadeUp} custom={0.08}>
-          Pawar.
+        
+        <motion.div layout variants={fadeUpVariant} custom={0.08} style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', marginBottom: '20px' }}>
+          <div className="role-pill" style={{ 
+            display: 'inline-flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            padding: '8px 24px', 
+            borderRadius: '999px', 
+            background: 'var(--amber-muted)',
+            border: '1px solid var(--amber-border)',
+            color: 'var(--amber)',
+            fontSize: '16px',
+            fontWeight: 500,
+            width: '240px',
+            height: '48px',
+            whiteSpace: 'nowrap'
+          }}>
+            <TextMorph ease="cubic-bezier(0.23, 1, 0.32, 1)">
+              {ROLES[roleIndex]}
+            </TextMorph>
+          </div>
         </motion.div>
-        <motion.div className="hero-role-tag" variants={fadeUp} custom={0.16}>
-          UX Designer
-        </motion.div>
-        <motion.p className="hero-desc" variants={fadeUp} custom={0.24}>
+
+        <motion.p layout className="hero-desc" variants={fadeUpVariant} custom={0.16}>
           Researching, designing, and shipping as the <strong>sole designer</strong> on products
           with real users and real stakes — now looking for the{' '}
           <em>right team to build</em> judgment with.
         </motion.p>
-        <motion.div className="hero-actions" variants={fadeUp} custom={0.32}>
-          <motion.a
+        <motion.div layout className="hero-actions" variants={fadeUpVariant} custom={0.32}>
+          <a
             href="#selected-work"
             className="btn-primary"
             onClick={(e) => {
               e.preventDefault();
               scrollToWork();
             }}
-            whileHover={{ y: -2, scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
           >
             View my work
-          </motion.a>
-          <motion.button
-            type="button"
+          </a>
+          <a
+            href="#contact"
             className="btn-secondary"
-            whileHover={{ y: -1, borderColor: 'rgba(240, 232, 216, 0.25)' }}
-            whileTap={{ scale: 0.98 }}
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+            }}
           >
             Download resume
-          </motion.button>
-        </motion.div>
-        <motion.div className="skill-row" variants={fadeUp} custom={0.4} aria-label="Core skills">
-          {skills.map((skill, i) => (
-            <motion.span
-              key={skill}
-              className="skill-tag"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.55 + i * 0.06, duration: 0.45 }}
-              whileHover={{
-                borderColor: 'rgba(240, 232, 216, 0.35)',
-                color: 'rgba(240, 232, 216, 0.75)',
-              }}
-            >
-              {skill}
-            </motion.span>
-          ))}
+          </a>
         </motion.div>
       </motion.div>
-
-      <motion.button
-        type="button"
-        className="scroll-hint"
-        onClick={scrollToWork}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 6, 0] }}
-        transition={{
-          opacity: { delay: 1, duration: 0.6 },
-          y: { delay: 1.2, duration: 2.2, repeat: Infinity, ease: 'easeInOut' },
-        }}
-        aria-label="Scroll to selected work"
+      <motion.div 
+        variants={fadeUpVariant}
+        initial="hidden"
+        animate="visible"
+        custom={0.5}
+        style={{ width: '100%', left: 0, bottom: '-380px', zIndex: 10, position: 'absolute', pointerEvents: 'none' }}
       >
-        <span className="scroll-text">Selected work</span>
-        <div className="scroll-line" />
-      </motion.button>
+        <TextLoop
+          text={skills.join(" ✦ ")}
+          shape="wave"
+          speed={90}
+          direction="forward"
+          separator="✦"
+          curviness={75}
+          fontSize={32}
+          fontWeight={800}
+          letterSpacing={2}
+          uppercase
+          color="#ffffff"
+          ribbon
+          ribbonColor="#b48246"
+          ribbonWidth={60}
+          pauseOnHover={false}
+        />
+      </motion.div>
     </section>
   );
 }

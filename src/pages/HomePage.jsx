@@ -12,7 +12,7 @@ export default function HomePage() {
       <main id="main-content">
         <Hero />
         <WorkSection />
-        <AboutStrip />h
+        <AboutStrip />
         <ClosingCta />
       </main>
       <Footer />

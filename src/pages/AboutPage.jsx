@@ -1,3 +1,7 @@
+import { motion } from 'framer-motion';
+import { staggerContainer, fadeIn } from '../animations/variants';
+import Nav from '../components/Nav';
+import Footer from '../components/Footer';
 import "../styles/about.css";
 
 const TimelineItem = ({ year, description }) => (
@@ -178,7 +182,9 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="about-page">
+    <>
+      <Nav />
+      <main id="main-content" className="about-page">
       {/* HERO */}
       <div className="about-hero">
         <div className="hero-left">
@@ -306,16 +312,23 @@ export default function AboutPage() {
               </strong>
             </div>
           </div>
-          <div className="belief-grid">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            className="belief-grid"
+          >
             {beliefs.map((belief) => (
-              <BeliefCard
-                key={belief.num}
-                num={belief.num}
-                title={belief.title}
-                description={belief.description}
-              />
+              <motion.div key={belief.num} variants={fadeIn}>
+                <BeliefCard
+                  num={belief.num}
+                  title={belief.title}
+                  description={belief.description}
+                />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -325,15 +338,22 @@ export default function AboutPage() {
           <div>
             <div className="section-eyebrow">Skills</div>
             <div className="section-title">What I bring</div>
-            <div className="skills-grid">
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              className="skills-grid"
+            >
               {skillsData.map((group) => (
-                <SkillGroup
-                  key={group.label}
-                  label={group.label}
-                  skills={group.skills}
-                />
+                <motion.div key={group.label} variants={fadeIn}>
+                  <SkillGroup
+                    label={group.label}
+                    skills={group.skills}
+                  />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
           <div>
             <div className="section-eyebrow" style={{ marginBottom: "8px" }}>
@@ -447,6 +467,8 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
-    </div>
+      </main>
+      <Footer />
+    </>
   );
 }
