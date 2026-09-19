@@ -276,7 +276,7 @@ nav.nav-scrolled {
    Right: Large visual artifact card (Selected Screen / Mockup)
    ============================================================ */
 .hero--editorial {
-  padding: 60px 40px 48px;
+  padding: 60px 40px 96px;
   position: relative;
 }
 
