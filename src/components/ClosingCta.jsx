@@ -22,30 +22,32 @@ export default function ClosingCta() {
       <div className="cta-inner">
         <div className="cta-eyebrow">Let&apos;s work together</div>
         <h2 className="cta-title" id="contact-title">
-          1.5 years building judgment <span>in isolation.</span>
+          Looking to build high-impact products <span>with a collaborative team.</span>
         </h2>
         <div className="cta-desc">
-          Now I want to build it in the right company — one where design is taken seriously and
-          process matters as much as output. If that sounds like yours, let&apos;s talk.
+          I bring hands-on experience solving ambiguous operational problems and shipping production tools. Now looking to join an established design organization where process rigor and user value drive the product forward.
         </div>
         <div className="cta-actions">
           <motion.a
-            href="mailto:you@example.com"
+            href="mailto:sandeep@email.com"
             className="btn-cta-primary"
             style={{ display: 'inline-block', textDecoration: 'none' }}
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.98 }}
           >
-            Say hello
+            Say Hello
           </motion.a>
-          <motion.button
-            type="button"
+          <motion.a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-cta-secondary"
+            style={{ display: 'inline-block', textDecoration: 'none' }}
             whileHover={{ y: -1, borderColor: 'rgba(240, 232, 216, 0.25)' }}
             whileTap={{ scale: 0.98 }}
           >
-            Download resume
-          </motion.button>
+            Download Resume
+          </motion.a>
         </div>
         <div className="cta-divider">
           <div className="cta-divider-line" />

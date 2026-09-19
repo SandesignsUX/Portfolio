@@ -40,14 +40,20 @@ function CardBody({ project, featured = false, metrics }) {
           </span>
         ))}
       </div>
-      <motion.div
-        className="pc-arrow"
-        aria-hidden="true"
-        whileHover={{ rotate: -12, scale: 1.06 }}
-        transition={{ type: 'spring', stiffness: 420, damping: 22 }}
-      >
-        →
-      </motion.div>
+      {project.actionLabel ? (
+        <div className="pc-action-link">
+          <span>{project.actionLabel}</span>
+        </div>
+      ) : (
+        <motion.div
+          className="pc-arrow"
+          aria-hidden="true"
+          whileHover={{ rotate: -12, scale: 1.06 }}
+          transition={{ type: 'spring', stiffness: 420, damping: 22 }}
+        >
+          →
+        </motion.div>
+      )}
     </div>
   );
 

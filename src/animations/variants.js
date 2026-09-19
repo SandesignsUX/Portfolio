@@ -24,10 +24,12 @@ export const fadeIn = {
   }),
 };
 
-export const createStaggerContainer = () => ({
+export const createStaggerContainer = (reduceMotion = false) => ({
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.15 },
+    transition: reduceMotion
+      ? { staggerChildren: 0, delayChildren: 0 }
+      : { staggerChildren: 0.08, delayChildren: 0.15 },
   },
 });
 

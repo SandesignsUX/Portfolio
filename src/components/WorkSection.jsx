@@ -5,7 +5,7 @@ import ProjectCard from './ProjectCard';
 
 export default function WorkSection() {
   return (
-    <section id="selected-work" className="work-section" aria-labelledby="work-section-title">
+    <section id="work" className="work-section" aria-labelledby="work-section-title">
       <motion.div
         className="section-header"
         initial="hidden"

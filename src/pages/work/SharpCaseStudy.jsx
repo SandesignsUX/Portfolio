@@ -1,33 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/caseStudy.css';
 import { CaseStudyImage } from '../../components/case-study/CaseStudyImage';
 
 const SharpCaseStudy = () => {
-  const [mode, setMode] = useState('scan');
-  const [switching, setSwitching] = useState(false);
-  const [justSwitched, setJustSwitched] = useState(null);
-  const [showToggleHint, setShowToggleHint] = useState(true);
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => setShowToggleHint(false), 4000);
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  const handleModeChange = (newMode) => {
-    if (newMode === mode) return;
-
-    setShowToggleHint(false);
-    setSwitching(true);
-
-    setTimeout(() => {
-      setMode(newMode);
-      setJustSwitched(newMode);
-      setSwitching(false);
-      setTimeout(() => setJustSwitched(null), 600);
-    }, 200);
-  };
-
   return (
     <div className="sharp-case-study">
       <nav className="global-nav" aria-label="Site navigation">
@@ -39,68 +15,14 @@ const SharpCaseStudy = () => {
         </Link>
       </nav>
 
-      <div
-        className="cs-bar"
-        role="region"
-        aria-label="Case study reading mode"
-      >
-        <div className="cs-bar-left">
-          <span className="cs-bar-label">SHARP</span>
-        </div>
-
-        <div className="cs-bar-centre">
-          <div
-            className="cs-toggle"
-            role="tablist"
-            aria-label="Choose how to read this case study"
-          >
-            <button
-              type="button"
-              role="tab"
-              id="tab-scan"
-              aria-selected={mode === 'scan'}
-              aria-controls="case-study-panel"
-              className={`toggle-btn ${mode === 'scan' ? 'active' : ''} ${justSwitched === 'scan' ? 'just-switched' : ''}`}
-              onClick={() => handleModeChange('scan')}
-            >
-              Scan Mode
-            </button>
-            <button
-              type="button"
-              role="tab"
-              id="tab-dive"
-              aria-selected={mode === 'dive'}
-              aria-controls="case-study-panel"
-              className={`toggle-btn ${mode === 'dive' ? 'active' : ''} ${justSwitched === 'dive' ? 'just-switched' : ''}`}
-              onClick={() => handleModeChange('dive')}
-            >
-              Deep Dive Mode
-            </button>
-          </div>
-          <p
-            className={`toggle-hint ${showToggleHint ? '' : 'is-hidden'}`}
-            aria-live="polite"
-          >
-            Choose how you want to read this case study.
-          </p>
-          <div className="toggle-subtitle">
-            {mode === 'scan' ? 'The 60-second version' : 'The full process story'}
-          </div>
-        </div>
-
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }} />
-      </div>
-
       <main
-        id="case-study-panel"
-        role="tabpanel"
-        aria-labelledby={mode === 'scan' ? 'tab-scan' : 'tab-dive'}
-        className={`page-content mode-content ${switching ? 'switching' : ''}`}
+        id="main-content"
+        className="page-content"
       >
-        {/* HERO (shared) */}
+        {/* HERO */}
         <div className="cs-hero">
           <div className="cs-hero-tag">UX Audit · Redesign · Enterprise SaaS · Internship</div>
-          <div className="cs-hero-title">Auditing and redesigning</div>
+          <h1 className="cs-hero-title">Auditing and redesigning</h1>
           <div className="cs-hero-title-light">SHARP</div>
           <div className="cs-hero-meta">
             <div className="cs-meta-item">
@@ -130,193 +52,9 @@ const SharpCaseStudy = () => {
           <div className="img-caption">SHARP (OOHAxis) — Laqshya Media Group's proprietary tool for planning and measuring OOH campaigns across 50,000+ sites in 26 cities.</div>
         </div>
 
-        {/* SCAN MODE */}
-        {mode === 'scan' && (
-          <>
-            <div className="cs-section">
-              <div className="cs-section-eyebrow">01 — The problem</div>
-              <div className="cs-section-title">The problem in one line</div>
-              <div className="problem-statement">
-                A proprietary enterprise platform used by media planners <strong>daily for 2–4 hours</strong> — with buried navigation, confusing function names, and no way to go back in any multi-step process without losing all your work. Laqshya wanted to sell it externally. It wasn't ready.
-              </div>
-              <div className="sub-label">What I was asked to do</div>
-              <ul className="scan-list">
-                <li>Audit the existing SHARP platform for usability problems</li>
-                <li>Redesign the interface to reduce friction for internal daily users</li>
-                <li>Make it polished enough to sell to external enterprise clients</li>
-              </ul>
-              <div className="scan-divider" />
-              <div className="sub-label">The constraint that shaped everything</div>
-              <ul className="scan-list">
-                <li>Existing users worked in the platform 2–4 hours every day — a dramatic redesign would break learned workflows</li>
-                <li>The goal was to improve without making it unfamiliar</li>
-              </ul>
-              <div
-                className="scan-at-a-glance"
-                aria-label="Project at a glance"
-              >
-                <div className="scan-glance-item">
-                  <div className="scan-glance-val">2–4 wks</div>
-                  <div className="scan-glance-lbl">Project timeline</div>
-                </div>
-                <div className="scan-glance-item">
-                  <div className="scan-glance-val">24</div>
-                  <div className="scan-glance-lbl">Violations found</div>
-                </div>
-                <div className="scan-glance-item">
-                  <div className="scan-glance-val">4</div>
-                  <div className="scan-glance-lbl">Users interviewed</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="cs-section">
-              <div className="cs-section-eyebrow">02 — What I did</div>
-              <div className="cs-section-title">My role and process</div>
-              <div className="sub-label">Role</div>
-              <ul className="scan-list" style={{ marginBottom: '20px' }}>
-                <li>Sole UX Designer — research, audit, wireframes, prototype</li>
-                <li>2–4 weeks · Internship at Laqshya Media Group</li>
-              </ul>
-              <div className="sub-label">Process in 3 phases</div>
-              <div className="phase-row-scan" style={{ marginTop: '10px' }}>
-                <div className="phase-card-scan">
-                  <div className="phase-num-scan">01</div>
-                  <div className="phase-title-scan">Discovery</div>
-                  <div className="phase-desc-scan">User interviews (4 internal users) + empathy mapping + content audit across 18 pages, 50+ screens.</div>
-                  <span className="phase-status status-done">Completed</span>
-                </div>
-                <div className="phase-card-scan">
-                  <div className="phase-num-scan">02</div>
-                  <div className="phase-title-scan">Heuristic evaluation + Redesign</div>
-                  <div className="phase-desc-scan">Nielsen's 10 heuristics across all flows. 24 violations found. Lo-fi wireframes for all major flows.</div>
-                  <span className="phase-status status-done">Completed</span>
-                </div>
-                <div className="phase-card-scan">
-                  <div className="phase-num-scan">03</div>
-                  <div className="phase-title-scan">Usability testing</div>
-                  <div className="phase-desc-scan">Study plan written. 3–5 participants ready. Prototype complete. Project closed before testing ran.</div>
-                  <span className="phase-status status-stopped">Not executed</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="cs-section">
-              <div className="cs-section-eyebrow">03 — Key findings</div>
-              <div className="cs-section-title">What the audit uncovered</div>
-              <div className="cs-section-subtitle">4 severity-4 violations — usability catastrophes that would kill an external launch.</div>
-
-              <div className="severity-grid">
-                <div className="severity-card">
-                  <div className="severity-num sev-4">4</div>
-                  <div className="severity-lbl" style={{ color: 'var(--red)' }}>Severity 4</div>
-                  <div className="severity-desc">Catastrophic — must fix before external release</div>
-                </div>
-                <div className="severity-card">
-                  <div className="severity-num sev-3">6</div>
-                  <div className="severity-lbl" style={{ color: 'var(--orange)' }}>Severity 3</div>
-                  <div className="severity-desc">Major problems — high priority</div>
-                </div>
-                <div className="severity-card">
-                  <div className="severity-num sev-2">11</div>
-                  <div className="severity-lbl" style={{ color: 'var(--amber)' }}>Severity 2</div>
-                  <div className="severity-desc">Minor problems — low priority</div>
-                </div>
-                <div className="severity-card">
-                  <div className="severity-num sev-1">3</div>
-                  <div className="severity-lbl" style={{ color: 'var(--cream-60)' }}>Severity 0–1</div>
-                  <div className="severity-desc">Cosmetic or non-issues</div>
-                </div>
-              </div>
-
-              <div className="sub-label">The 4 severity-4 violations (scan version)</div>
-              <ul className="scan-list" style={{ marginTop: '10px' }}>
-                <li>No way to edit or delete a campaign after creation — any mistake required starting from scratch</li>
-                <li>City Segment gave no signifier after polygon selection — users stranded with no next step</li>
-                <li>Plan My Campaign (most-used daily function) buried in 3rd–4th nav position</li>
-                <li>Upload Plan silently skipped Touch Points — a critical campaign setup step — with no warning</li>
-              </ul>
-            </div>
-
-
-            <div className="cs-section">
-              <div className="cs-section-eyebrow">04 — Key decisions</div>
-              <div className="cs-section-title">4 decisions that shaped the redesign</div>
-              <div className="cs-section-subtitle">What I chose — and the one-line reason why.</div>
-              <div className="decision-cards">
-                <div className="dc">
-                  <div className="dc-head">Why I restructured navigation around user priority, not feature order</div>
-                  <div className="dc-chose-only">
-                    <span className="dc-tag tag-chose">Chose</span>
-                    <span className="dc-text">Surfaced Plan My Campaign as primary nav item — navigation should reflect user priority, not development history</span>
-                  </div>
-                </div>
-                <div className="dc">
-                  <div className="dc-head">Why I replaced donut graphs with bar graphs across the platform</div>
-                  <div className="dc-chose-only">
-                    <span className="dc-tag tag-chose">Chose</span>
-                    <span className="dc-text">All 4 users flagged donut charts independently — media planners compare numbers, they don't admire visuals</span>
-                  </div>
-                </div>
-                <div className="dc">
-                  <div className="dc-head">Why I added progressive disclosure to all multi-step processes</div>
-                  <div className="dc-chose-only">
-                    <span className="dc-tag tag-chose">Chose</span>
-                    <span className="dc-text">Persistent back navigation + draft-saving — in a tool where flows involve hundreds of site selections, losing everything on a back click was a daily disaster</span>
-                  </div>
-                </div>
-                <div className="dc">
-                  <div className="dc-head">Why I kept the redesign conservative — improving, not reinventing</div>
-                  <div className="dc-chose-only">
-                    <span className="dc-tag tag-chose">Chose</span>
-                    <span className="dc-text">Preserved familiar patterns — 4 daily users with years of muscle memory couldn't afford a dramatic visual shift</span>
-                  </div>
-                </div>
-              </div>
-              <div className="highlight-block">The platform had been built feature-by-feature. Nobody had ever stepped back and mapped the whole thing from a user's point of view. This project was the first time that happened.</div>
-            </div>
-
-            <div className="cs-section">
-              <div className="cs-section-eyebrow">05 — What happened</div>
-              <div className="cs-section-title">Honest outcome</div>
-              <div className="testing-grid-3">
-                <div className="testing-col">
-                  <div className="testing-col-label">What was completed</div>
-                  <ul className="scan-list">
-                    <li>User interviews — 4 users, empathy maps</li>
-                    <li>Content audit — 18 pages mapped</li>
-                    <li>Heuristic evaluation — 24 violations</li>
-                    <li>Lo-fi wireframes — all major flows</li>
-                    <li>Usability study plan — written and ready</li>
-                  </ul>
-                </div>
-                <div className="testing-col">
-                  <div className="testing-col-label">What didn't happen</div>
-                  <ul className="scan-list">
-                    <li>Usability testing — never ran</li>
-                    <li>Hi-fi prototype — never built</li>
-                    <li>Developer handoff — never happened</li>
-                  </ul>
-                </div>
-                <div className="testing-col">
-                  <div className="testing-col-label">Why</div>
-                  <ul className="scan-list">
-                    <li>Business decision — not a design quality issue</li>
-                    <li>The research and lo-fi were complete and documented</li>
-                    <li>The direction was right. The timing wasn't.</li>
-                  </ul>
-                </div>
-              </div>
-              <div className="highlight-block">A project shut down for business reasons is not the same as a project that failed for design reasons. The work was done. The findings were real. The prototype was ready.</div>
-            </div>
-          </>
-        )}
-
-        {/* DEEP DIVE MODE */}
-        {mode === 'dive' && (
-          <>
-            <div className="cs-section">
-              <div className="cs-section-eyebrow">01 — The product</div>
+        {/* CASE STUDY CONTENT */}
+        <div className="cs-section">
+          <div className="cs-section-eyebrow">01 — The product</div>
               <div className="cs-section-title">What SHARP is and who uses it</div>
               <div className="cs-section-subtitle">An internal enterprise tool used daily by Laqshya's media research team — to plan and measure outdoor advertising campaigns for clients.</div>
               <div className="body-text">SHARP (OOHAxis) plans OOH campaigns across 50,000+ geo-tagged billboard sites in 26 cities. It provides hyperlocal metrics — reach, impressions, cost per impression, target group analytics — and lets planners shortlist sites, upload plans, create campaigns, and export client-ready reports. Used by GMs, Executives, and Project Executives — <strong>2–4 hours every day.</strong></div>
@@ -610,8 +348,6 @@ const SharpCaseStudy = () => {
               <div className="body-text" style={{ marginTop: '20px' }}>Heuristic evaluation changed how I think about audit work. Rating every violation on a severity scale forced me to prioritise ruthlessly — a usability catastrophe is categorically different from a cosmetic problem. <strong>If I did this again:</strong> stronger business case at the research stage, commercial risk language instead of UX problem language.</div>
               <div className="highlight-block">The most important skill in enterprise UX isn't designing better interfaces. It's making the invisible friction visible to people who've stopped noticing it.</div>
             </div>
-          </>
-        )}
 
         {/* NEXT PROJECT (shared) */}
         <Link className="next-project" to="/">

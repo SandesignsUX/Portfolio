@@ -20,9 +20,7 @@ export default function AboutStrip() {
           Building judgment in the <span>real world.</span>
         </h2>
         <div className="about-desc">
-          I&apos;ve spent the last 1.5 years as the sole UX designer at a small product company —
-          navigating ambiguous briefs, non-tech-savvy users, and real financial stakes. Now I&apos;m
-          looking for the right team to build judgment with, not just in isolation.
+          Product Designer with hands-on experience navigating complex operational workflows, dense business logic, and real financial stakes. Focused on designing scalable systems that bridge user needs with business metrics.
         </div>
         <MotionLink
           to="/about"

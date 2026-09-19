@@ -422,12 +422,10 @@ export default function AboutPage() {
               than one round of feedback.
             </div>
             <div className="target-row">
-              <span className="target-pill">UX agencies</span>
-              <span className="target-pill">Product companies</span>
-              <span className="target-pill">Mumbai · Hybrid · Remote</span>
-              <span className="target-pill">
-                Ungrammary · Lollipop · Onething · Groww · Razorpay
-              </span>
+              <span className="target-pill">B2B SaaS</span>
+              <span className="target-pill">FinTech & Operations</span>
+              <span className="target-pill">Product Companies</span>
+              <span className="target-pill">Mumbai · Hybrid</span>
             </div>
           </div>
           <div>
@@ -454,14 +452,13 @@ export default function AboutPage() {
       >
         <div className="closing-strip">
           <div className="closing-quote">
-            "I've spent the last 1.5 years building judgment in isolation — now
-            I want to build it in <em>the right company.</em>"
+            "Looking to build high-impact products with <em>a collaborative team.</em>"
           </div>
           <div className="closing-cta-row">
-            <a className="btn-primary" href="#">
+            <a className="btn-primary" href="/#work">
               View my work →
             </a>
-            <a className="btn-secondary" href="#">
+            <a className="btn-secondary" href="mailto:sandeep@email.com">
               Say hello
             </a>
           </div>

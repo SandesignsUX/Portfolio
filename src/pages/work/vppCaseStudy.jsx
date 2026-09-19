@@ -1,34 +1,10 @@
-import { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { vppImages } from "../../data/vppImages";
 import "../../styles/caseStudy.css";
 import { CaseStudyImage } from "../../components/case-study/CaseStudyImage";
 
 export default function VPPCaseStudy() {
-  const [mode, setMode] = useState("scan");
-  const [switching, setSwitching] = useState(false);
-  const [justSwitched, setJustSwitched] = useState(null);
-  const [showToggleHint, setShowToggleHint] = useState(true);
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => setShowToggleHint(false), 4000);
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  const handleModeChange = (newMode) => {
-    if (newMode === mode) return;
-
-    setShowToggleHint(false);
-    setSwitching(true);
-
-    setTimeout(() => {
-      setMode(newMode);
-      setJustSwitched(newMode);
-      setSwitching(false);
-      setTimeout(() => setJustSwitched(null), 600);
-    }, 200);
-  };
-
   return (
     <>
       <nav className="global-nav" aria-label="Site navigation">
@@ -40,70 +16,14 @@ export default function VPPCaseStudy() {
         </Link>
       </nav>
 
-      <div
-        className="cs-bar"
-        role="region"
-        aria-label="Case study reading mode"
-      >
-        <div className="cs-bar-left">
-          <span className="cs-bar-label">VPP</span>
-        </div>
-
-        <div className="cs-bar-centre">
-          <div
-            className="cs-toggle"
-            role="tablist"
-            aria-label="Choose how to read this case study"
-          >
-            <button
-              type="button"
-              role="tab"
-              id="tab-scan"
-              aria-selected={mode === "scan"}
-              aria-controls="case-study-panel"
-              className={`toggle-btn ${mode === "scan" ? "active" : ""} ${justSwitched === "scan" ? "just-switched" : ""}`}
-              onClick={() => handleModeChange("scan")}
-            >
-              Scan Mode
-            </button>
-            <button
-              type="button"
-              role="tab"
-              id="tab-dive"
-              aria-selected={mode === "dive"}
-              aria-controls="case-study-panel"
-              className={`toggle-btn ${mode === "dive" ? "active" : ""} ${justSwitched === "dive" ? "just-switched" : ""}`}
-              onClick={() => handleModeChange("dive")}
-            >
-              Deep Dive Mode
-            </button>
-          </div>
-          <p
-            className={`toggle-hint ${showToggleHint ? "" : "is-hidden"}`}
-            aria-live="polite"
-          >
-            Choose how you want to read this case study.
-          </p>
-          <div className="toggle-subtitle">
-            {mode === "scan"
-              ? "The 60-second version"
-              : "The full process story"}
-          </div>
-        </div>
-
-        <div style={{ display: "flex", justifyContent: "flex-end" }} />
-      </div>
-
       <main
-        id="case-study-panel"
-        role="tabpanel"
-        aria-labelledby={mode === "scan" ? "tab-scan" : "tab-dive"}
-        className={`page-content mode-content ${switching ? "switching" : ""}`}
+        id="main-content"
+        className="page-content"
       >
-        {/* HERO (shared) */}
+        {/* HERO */}
         <div className="cs-hero">
           <div className="cs-hero-tag">Lead project · Operations · FinTech</div>
-          <div className="cs-hero-title">Streamlining</div>
+          <h1 className="cs-hero-title">Streamlining</h1>
           <div className="cs-hero-title-light">fuel station operations</div>
 
           <div className="cs-hero-meta">
@@ -138,237 +58,18 @@ export default function VPPCaseStudy() {
           </div>
         </div>
 
-        {/* SCAN MODE */}
-        {mode === "scan" && (
-          <>
-            <div className="cs-section">
-              <div className="cs-section-eyebrow">01 — The problem</div>
-              <div className="cs-section-title">The problem in one line</div>
+        {/* CASE STUDY CONTENT */}
+        <div className="cs-section">
+          <div className="cs-section-eyebrow">01 — The problem</div>
+          <div className="cs-section-title">
+            The problem nobody had named
+          </div>
+          <div className="cs-section-subtitle">
+            The brief said &ldquo;digitise operations.&rdquo; The site visit
+            said something different.
+          </div>
 
-              <div className="problem-statement">
-                A fuel station running its entire business on{" "}
-                <strong>paper logs, Excel, and Tally</strong> — three tools that
-                didn&apos;t speak to each other. Cashiers were doing unpaid
-                overtime every shift. Nobody had noticed.
-              </div>
-
-              <div className="sub-label">What I was asked to do</div>
-              <ul className="scan-list">
-                <li>Digitise daily operations for cashiers and accountants</li>
-                <li>Give the owner real-time financial visibility</li>
-                <li>
-                  Replace the paper-and-spreadsheet workflow with a unified
-                  platform
-                </li>
-              </ul>
-
-              <div className="scan-divider" />
-              <div className="sub-label">What I actually found on-site</div>
-              <ul className="scan-list">
-                <li>
-                  Cashiers stayed an unpaid hour after every shift to hand over
-                  paper logs — never mentioned in the brief
-                </li>
-                <li>
-                  Monthly credit invoicing was a 6-step manual process ending in
-                  a WhatsApp photo — also not in scope
-                </li>
-              </ul>
-
-              <div
-                className="scan-at-a-glance"
-                aria-label="Project at a glance"
-              >
-                <div className="scan-glance-item">
-                  <div className="scan-glance-val">3 mo</div>
-                  <div className="scan-glance-lbl">Project timeline</div>
-                </div>
-                <div className="scan-glance-item">
-                  <div className="scan-glance-val">4</div>
-                  <div className="scan-glance-lbl">
-                    Stakeholders interviewed
-                  </div>
-                </div>
-                <div className="scan-glance-item">
-                  <div className="scan-glance-val">4</div>
-                  <div className="scan-glance-lbl">Users tested on-site</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="cs-section">
-              <div className="cs-section-eyebrow">02 — What I did</div>
-              <div className="cs-section-title">My role and process</div>
-
-              <div className="sub-label">Role</div>
-              <ul className="scan-list" style={{ marginBottom: "20px" }}>
-                <li>
-                  Sole UX Designer — research, flows, wireframes, testing, dev
-                  handoff
-                </li>
-                <li>3 months total · Under 3 weeks to dev handoff</li>
-              </ul>
-
-              <div className="sub-label">Process in 4 steps</div>
-              <div className="phase-row-scan" style={{ marginTop: "10px" }}>
-                <div className="phase-card-scan">
-                  <div className="phase-num-scan">01</div>
-                  <div className="phase-title-scan">On-site discovery</div>
-                  <div className="phase-desc-scan">
-                    Interviews with cashiers, accountant, owner + site
-                    observation
-                  </div>
-                </div>
-                <div className="phase-card-scan">
-                  <div className="phase-num-scan">02</div>
-                  <div className="phase-title-scan">
-                    User flows + hi-fi wireframes
-                  </div>
-                  <div className="phase-desc-scan">
-                    Skipped lo-fi — went straight to hi-fi given the timeline
-                  </div>
-                </div>
-                <div className="phase-card-scan">
-                  <div className="phase-num-scan">03</div>
-                  <div className="phase-title-scan">Usability testing</div>
-                  <div className="phase-desc-scan">
-                    On-site at the fuel station, real users, live data, staging
-                    build
-                  </div>
-                </div>
-                <div className="phase-card-scan">
-                  <div className="phase-num-scan">04</div>
-                  <div className="phase-title-scan">Dev collaboration</div>
-                  <div className="phase-desc-scan">
-                    Daily calls through build — GST logic too complex for
-                    Figma-only handoff
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="cs-section">
-              <div className="cs-section-eyebrow">03 — Key decisions</div>
-              <div className="cs-section-title">
-                4 decisions that shaped the product
-              </div>
-              <div className="cs-section-subtitle">
-                What I chose — and the one-line reason why.
-              </div>
-
-              <div className="decision-cards">
-                <div className="dc">
-                  <div className="dc-head">
-                    Why I skipped lo-fi and went straight to hi-fi
-                  </div>
-                  <div className="dc-chose-only">
-                    <span className="dc-tag tag-chose">Chose</span>
-                    <span className="dc-text">
-                      Hi-fi from day one — 3 weeks to handoff, non-designer
-                      client needed something concrete to react to immediately
-                    </span>
-                  </div>
-                </div>
-                <div className="dc">
-                  <div className="dc-head">
-                    Why I chose real-time alerts over end-of-day reports
-                  </div>
-                  <div className="dc-chose-only">
-                    <span className="dc-tag tag-chose">Chose</span>
-                    <span className="dc-text">
-                      Field-level inline alerts — by end-of-day, errors had
-                      already compounded through downstream entries
-                    </span>
-                  </div>
-                </div>
-                <div className="dc">
-                  <div className="dc-head">
-                    Why we built a dedicated credit invoicing flow
-                  </div>
-                  <div className="dc-chose-only">
-                    <span className="dc-tag tag-chose">Chose</span>
-                    <span className="dc-text">
-                      Automated the entire 6-step WhatsApp process into a single
-                      action — not in original scope, but clearly broken
-                    </span>
-                  </div>
-                </div>
-                <div className="dc">
-                  <div className="dc-head">
-                    Why I stayed involved through development
-                  </div>
-                  <div className="dc-chose-only">
-                    <span className="dc-tag tag-chose">Chose</span>
-                    <span className="dc-text">
-                      Daily calls through build — GST calculations and tax logic
-                      were too complex for a Figma-only handoff
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="cs-section">
-              <div className="cs-section-eyebrow">04 — Results</div>
-              <div className="cs-section-title">What it delivered</div>
-
-              <div className="metric-strip">
-                <div className="metric-item">
-                  <div className="metric-val">45→20 min</div>
-                  <div className="metric-lbl">Shift closing time</div>
-                </div>
-                <div className="metric-item">
-                  <div className="metric-val">0 hrs</div>
-                  <div className="metric-lbl">Unpaid overtime eliminated</div>
-                </div>
-                <div className="metric-item">
-                  <div className="metric-val">6→1 steps</div>
-                  <div className="metric-lbl">Credit invoice process</div>
-                </div>
-                <div className="metric-item">
-                  <div className="metric-val">100%</div>
-                  <div className="metric-lbl">Paper-to-digital adoption</div>
-                </div>
-              </div>
-
-              <ul className="scan-list">
-                <li>
-                  Shift closing dropped from 45 minutes to 20 — cashiers
-                  finished and left on time
-                </li>
-                <li>
-                  A 6-step manual WhatsApp invoice process became one button
-                  inside the platform
-                </li>
-                <li>
-                  Every shift transitioned — including users who had never used
-                  a digital ops tool before
-                </li>
-              </ul>
-
-              <div className="highlight-block">
-                This project started as a digitisation task. It became a
-                workflow redesign — because we went on-site before we opened
-                Figma.
-              </div>
-            </div>
-          </>
-        )}
-
-        {/* DEEP DIVE MODE */}
-        {mode === "dive" && (
-          <>
-            <div className="cs-section">
-              <div className="cs-section-eyebrow">01 — The problem</div>
-              <div className="cs-section-title">
-                The problem nobody had named
-              </div>
-              <div className="cs-section-subtitle">
-                The brief said &ldquo;digitise operations.&rdquo; The site visit
-                said something different.
-              </div>
-
-              <div className="problem-statement">
+          <div className="problem-statement">
                 Fuel station staff were running a business on{" "}
                 <strong>paper logs, Excel, and Tally</strong> — three tools that
                 didn&apos;t talk to each other.
@@ -849,8 +550,6 @@ export default function VPPCaseStudy() {
                 to show you know what you would do next.
               </div>
             </div>
-          </>
-        )}
 
         <Link
           className="next-project"
